@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+
+<html lang="id">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>5. Homomorfisma Grup | Lab MA3021</title>
+<link href="styles.css" rel="stylesheet"/>
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']], processEscapes: true },
+  svg: { fontCache: 'global' },
+  startup: { typeset: true }
+};
+</script>
+<script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+<body>
+<header><div class="header-inner">
+<h1>5. Homomorfisma Grup</h1>
+<p>Dari peta penjaga struktur sampai kernel</p>
+</div></header>
+<main>
+<details class="toggle">
+<summary>Materi Pengantar</summary>
+<div class="toggle-body"><p>Homomorfisma adalah peta yang menjaga struktur. Artinya, kita boleh mengganti bentuk data, tetapi pola operasinya tetap cocok. Ini seperti menerjemahkan kalimat ke bahasa lain tanpa mengubah makna utamanya.</p><p>Untuk grup, aturan utamanya adalah operasi sebelum dipetakan harus sama hasilnya dengan operasi sesudah dipetakan.</p><div class="formula">\[
+φ(ab)=φ(a)φ(b)
+\]</div><p>Untuk grup aditif, bentuknya menjadi:</p><div class="formula">\[
+φ(a + b) = φ(a) + φ(b)
+\]</div><section class="intro-note-section"><h4>Kenapa topik ini muncul?</h4><p>Homomorfisma muncul ketika kita membandingkan dua struktur. Kita ingin tahu apakah sebuah pemetaan hanya memindahkan elemen, atau benar-benar menjaga cara elemen-elemen itu beroperasi.</p><p>Pemetaan biasa hanya peduli ke mana setiap elemen pergi. Homomorfisma menambahkan syarat yang lebih kuat: hasil operasi setelah dipetakan harus cocok dengan hasil pemetaan setelah operasi dilakukan.</p></section><div class="example-box"><h3>Kernel dan image</h3>
+<p>Kernel adalah semua elemen yang dipetakan ke identitas. Kernel menunjukkan bagian informasi yang hilang setelah peta diterapkan.</p>
+<div class="formula">\[
+ker φ = {g ∈ G : φ(g)=e}
+\]</div>
+<p>Image adalah semua output yang benar-benar muncul. Jika image sama dengan kodomain, peta itu surjektif.</p>
+</div>
+<div class="illustration-box">
+<h4>Visual bantu: homomorfisma menjaga operasi</h4>
+<svg aria-label="Diagram homomorfisma menjaga operasi" class="concept-svg" role="img" viewbox="0 0 720 260">
+<defs><marker id="arr5" markerheight="7" markerwidth="7" orient="auto" refx="9" refy="5" viewbox="0 0 10 10"><path d="M0 0 L10 5 L0 10 Z" fill="#2563eb"></path></marker></defs>
+<rect fill="#eff6ff" height="70" rx="14" stroke="#93c5fd" width="220" x="60" y="45"></rect>
+<rect fill="#ecfdf5" height="70" rx="14" stroke="#86efac" width="220" x="440" y="45"></rect>
+<rect fill="#eff6ff" height="70" rx="14" stroke="#93c5fd" width="220" x="60" y="160"></rect>
+<rect fill="#ecfdf5" height="70" rx="14" stroke="#86efac" width="220" x="440" y="160"></rect>
+<text fill="#172033" font-size="17" text-anchor="middle" x="170" y="88">a + b</text>
+<text fill="#172033" font-size="17" text-anchor="middle" x="550" y="88">φ(a + b)</text>
+<text fill="#172033" font-size="17" text-anchor="middle" x="170" y="203">a, b</text>
+<text fill="#172033" font-size="17" text-anchor="middle" x="550" y="203">φ(a) + φ(b)</text>
+<line marker-end="url(#arr5)" stroke="#2563eb" stroke-width="3" x1="280" x2="438" y1="80" y2="80"></line>
+<line marker-end="url(#arr5)" stroke="#2563eb" stroke-width="3" x1="170" x2="170" y1="160" y2="116"></line>
+<line marker-end="url(#arr5)" stroke="#2563eb" stroke-width="3" x1="280" x2="438" y1="195" y2="195"></line>
+<line marker-end="url(#arr5)" stroke="#2563eb" stroke-width="3" x1="550" x2="550" y1="160" y2="116"></line>
+<text fill="#64748b" font-size="16" text-anchor="middle" x="360" y="137">Homomorfisma jika dua hasil kanan sama.</text>
+</svg>
+<p class="svg-caption">Dua jalur harus memberi hasil yang sama: operasikan dulu lalu petakan, atau petakan dulu lalu operasikan.</p>
+</div>
+<div class="application-box"><h3>Aplikasi nyata dan koneksinya</h3><p>Homomorfisma dapat dipahami sebagai proses menyederhanakan atau menerjemahkan struktur tanpa merusak pola operasi. Ia boleh menggabungkan beberapa elemen menjadi satu hasil yang sama, tetapi penggabungan itu harus tetap menghormati operasi grup. Karena itu homomorfisma berada di antara dua kebutuhan: menyederhanakan struktur dan menjaga pola yang penting.</p><p>Kernel dan image membantu membaca kualitas pemetaan tersebut. Kernel menunjukkan bagian domain yang menjadi tidak terlihat karena dipetakan ke identitas. Image menunjukkan bagian kodomain yang benar-benar dicapai. Jika kernel besar, banyak informasi hilang. Jika image kecil, pemetaan hanya menjangkau sebagian kecil dari struktur tujuan.</p></div>
+<div class="summary-box">
+<h3>Ringkasan agar tidak tersesat</h3>
+<div class="summary-grid"><div><strong>Inti:</strong><br/>Homomorfisma adalah fungsi yang menjaga operasi.</div><div><strong>Aturan penting:</strong><br/>Kernel berada di domain; image berada di kodomain.</div><div><strong>Yang dicek:</strong><br/>Cek apakah operasi sebelum dan sesudah pemetaan tetap cocok.</div></div>
+<div class="mistake-inside-box">
+<h4>Kesalahan umum</h4>
+<ul><li>Mengira homomorfisma sama seperti fungsi biasa. Homomorfisma wajib menjaga operasi.</li><li>Mengira kernel adalah output. Kernel adalah kumpulan input yang dipetakan ke identitas.</li><li>Mengira kehilangan informasi selalu buruk. Ringkasan bisa berguna asal struktur penting tetap terjaga.</li></ul>
+</div>
+<p class="summary-note">Cara cepat mengingat: homomorfisma membandingkan dua dunia. Kernel menjawab 'apa yang hilang?', image menjawab 'output apa yang benar-benar muncul?'.</p><div class="mini-visual-box">
+<h4>Bagian rawan bingung: kernel dan image</h4>
+<svg aria-label="Kernel dan image pada homomorfisma" class="mini-svg" role="img" viewbox="0 0 520 170">
+<defs><marker id="m5" markerheight="6" markerwidth="6" orient="auto" refx="9" refy="5" viewbox="0 0 10 10"><path d="M0 0 L10 5 L0 10 Z" fill="#2563eb"></path></marker></defs>
+<rect fill="#eff6ff" height="110" rx="14" stroke="#93c5fd" width="170" x="40" y="32"></rect>
+<rect fill="#ecfdf5" height="110" rx="14" stroke="#86efac" width="170" x="310" y="32"></rect>
+<text font-size="15" font-weight="700" text-anchor="middle" x="125" y="58">Domain</text>
+<text font-size="15" font-weight="700" text-anchor="middle" x="395" y="58">Kodomain</text>
+<circle cx="90" cy="92" fill="#fee2e2" r="13" stroke="#ef4444"></circle><text font-size="13" x="86" y="97">0</text>
+<circle cx="140" cy="115" fill="#fee2e2" r="13" stroke="#ef4444"></circle><text font-size="13" x="136" y="120">3</text>
+<circle cx="395" cy="92" fill="#dcfce7" r="15" stroke="#16a34a"></circle><text font-size="13" x="391" y="97">0</text>
+<line marker-end="url(#m5)" stroke="#2563eb" stroke-width="2.5" x1="103" x2="379" y1="92" y2="92"></line>
+<line marker-end="url(#m5)" stroke="#2563eb" stroke-width="2.5" x1="153" x2="379" y1="115" y2="92"></line>
+<text fill="#b91c1c" font-size="13" text-anchor="middle" x="125" y="155">kernel</text>
+<text fill="#047857" font-size="13" text-anchor="middle" x="395" y="155">image</text>
+</svg>
+<p>Kernel hidup di domain, bukan di kodomain. Image hidup di kodomain sebagai output yang benar-benar muncul.</p>
+</div>
+</div>
+<div class="complete-box">
+<h3>Inti konsep yang harus dibawa pulang</h3>
+<p>Homomorfisma adalah fungsi yang menjaga operasi. Ia menjelaskan kapan dua struktur memiliki pola yang kompatibel, meskipun elemennya tampak berbeda. Kernel mengukur informasi yang hilang menuju identitas, sedangkan image mengukur hasil yang benar-benar muncul di kodomain. Dengan homomorfisma, kita tidak hanya bertanya elemen ini pergi ke mana, tetapi apakah operasi tetap bermakna setelah dipetakan.</p>
+</div>
+<div class="source-box">
+<h3>Pelajari lebih lanjut</h3>
+<ul class="source-list"><li><a href="https://lmsspada.kemdiktisaintek.go.id/pluginfile.php/716008/mod_folder/content/0/Pertemuan%2012/12_Homomorfisme.pdf?forcedownload=1" rel="noopener" target="_blank">Materi terkait Bahasa Indonesia: homomorfisma pada grup</a></li>
+<li><a href="https://tahtamedia.co.id/index.php/issj/article/download/1162/1160/4274" rel="noopener" target="_blank">Buku Indonesia: homomorfisma dan isomorfisma grup</a></li>
+<li><a href="https://repo.uinsatu.ac.id/33242/1/STRUKTUR%20ALJABAR%20%28Bapak%20muniri%29.pdf" rel="noopener" target="_blank">Buku Indonesia: homomorfisma grup</a></li>
+<li><a href="https://doc.sagemath.org/html/en/prep/quickstarts/abstract-algebra.html" rel="noopener" target="_blank">SageMath abstract algebra quickstart</a></li>
+<li><a href="https://nathancarter.github.io/group-explorer/index.html" rel="noopener" target="_blank">Group Explorer</a></li></ul>
+</div>
+</div></details>
+<details class="toggle">
+<summary>Lab 1 dan kuis</summary>
+<div class="toggle-body"><div class="lab" id="hom1">
+<div class="lab-title"><h3><span class="pill blue lab-name-pill">Lab 5A. Jam ke Kelas Shift</span></h3></div><div class="lab-sense-box"><h4>Cara membaca lab dan widget ini</h4><p>Gunakan widget dan visual untuk membaca pemetaan sebagai penyederhanaan struktur. Perhatikan elemen mana yang menjadi sama setelah dipetakan, karena di situlah gagasan kernel mulai muncul.</p></div>
+<p class="lab-objective"><strong>Tujuan lab:</strong> Cek apakah peta modulo masih menjaga pola penjumlahan.</p>
+<p class="predict-box"><strong>Sebelum klik tombol:</strong> tebak dulu hasilnya, lalu bandingkan dengan visualisasi.</p>
+<h4>Cerita penerapan</h4><p>Jadwal rumah sakit melacak jam modulo 24, tetapi dashboard hanya membutuhkan kelas sisa yang lebih sederhana. Peta yang berguna harus menjaga pola penjumlahan.</p>
+<h4>Teori dasar</h4><p>Homomorfisma grup menjaga operasi. Kernel berisi elemen-elemen yang runtuh menjadi identitas.</p>
+<div class="formula">\(φ(a + b) = φ(a) + φ(b),\quad kerφ=\{g:φ(g)=e\}\)</div>
+<div class="two"><div><label>Peta φ: Z_n ke Z_m, φ(x)=kx mod m</label><input id="hom1_n" type="number" value="6"/><input id="hom1_m" type="number" value="3"/><input id="hom1_k" type="number" value="1"/><button onclick="hom1()">Uji peta</button></div><div><div class="svgbox" id="hom1_svg"></div><div class="result" id="hom1_out"></div></div></div>
+<div class="quiz"><h4>Cek pemahaman</h4>
+<div class="quiz-item">
+<p><strong>P1.</strong> Untuk φ:Z6→Z3, φ(x)=x mod 3, hitung ker(φ).</p>
+<input id="hom1_q1" placeholder="Tulis jawabanmu"/>
+<button onclick="checkQuiz('hom1',1)">Cek</button>
+<div class="feedback hint" id="hom1_f1"></div>
+</div>
+<div class="quiz-item">
+<p><strong>P2.</strong> Tuliskan aturan homomorfisma untuk grup aditif.</p>
+<textarea id="hom1_q2" placeholder="Tulis jawaban dan alasanmu"></textarea>
+<button onclick="checkQuiz('hom1',2)">Cek</button>
+<div class="feedback hint" id="hom1_f2"></div>
+</div>
+</div>
+</div></div>
+</details>
+<details class="toggle">
+<summary>Lab 2 dan kuis</summary>
+<div class="toggle-body"><div class="lab" id="hom2">
+<div class="lab-title"><h3><span class="pill blue lab-name-pill">Lab 5B. Penyederhanaan Label Sensor</span></h3></div><div class="lab-sense-box"><h4>Cara membaca lab dan widget ini</h4><p>Gunakan widget untuk menilai apakah ringkasan masih menjaga pola. Pemetaan yang terlalu kasar mungkin mudah dibaca, tetapi bisa menghapus struktur yang seharusnya dipertahankan.</p></div>
+<p class="lab-objective"><strong>Tujuan lab:</strong> Lihat kernel sebagai bagian informasi yang hilang saat data diringkas.</p>
+<p class="predict-box"><strong>Sebelum klik tombol:</strong> tebak dulu hasilnya, lalu bandingkan dengan visualisasi.</p>
+<h4>Cerita penerapan</h4><p>Perangkat IoT mengirim state detail, tetapi server hanya menyimpan label ringkas. Gambar menunjukkan label yang dapat dicapai dan state yang menjadi tidak terlihat.</p>
+<h4>Teori dasar</h4><p>Homomorfisma injektif tepat ketika kernel hanya berisi identitas. Jika image sama dengan kodomain, petanya surjektif.</p>
+<div class="formula">φ injektif ⇔ ker(φ) = {e}</div>
+<div class="two"><div><label>Bayangan 0,1,2,3 di Z2</label><input id="hom2_img" value="0,1,0,1"/><button onclick="hom2()">Cek preservation</button></div><div><div class="svgbox" id="hom2_svg"></div><div class="result" id="hom2_out"></div></div></div>
+<div class="quiz"><h4>Cek pemahaman</h4>
+<div class="quiz-item">
+<p><strong>P1.</strong> Kapan homomorfisma grup bersifat injektif jika dilihat dari kernel-nya?</p>
+<textarea id="hom2_q1" placeholder="Tulis jawaban dan alasanmu"></textarea>
+<button onclick="checkQuiz('hom2',1)">Cek</button>
+<div class="feedback hint" id="hom2_f1"></div>
+</div>
+<div class="quiz-item">
+<p><strong>P2.</strong> Jika bayangan 0,1,2,3 dari Z4 ke Z2 adalah 0,1,0,1, apa kernel-nya?</p>
+<input id="hom2_q2" placeholder="Tulis jawabanmu"/>
+<button onclick="checkQuiz('hom2',2)">Cek</button>
+<div class="feedback hint" id="hom2_f2"></div>
+</div>
+</div>
+</div></div>
+</details>
+<div class="bottom-home-link"><a href="index.html">← Kembali ke Beranda</a></div>
+</main>
+<footer>Rumus dirender memakai MathJax v3 dengan output SVG. Buka dengan akses internet agar rumus tampil rapi.</footer>
+<script src="app.js"></script>
+</body>
+</html>

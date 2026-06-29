@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+
+<html lang="id">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>7. Daerah Integral dan Field | Lab MA3021</title>
+<link href="styles.css" rel="stylesheet"/>
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']], processEscapes: true },
+  svg: { fontCache: 'global' },
+  startup: { typeset: true }
+};
+</script>
+<script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+<body>
+<header><div class="header-inner">
+<h1>7. Daerah Integral dan Field</h1>
+<p>Dari aritmetika AES sampai pemulihan data</p>
+</div></header>
+<main>
+<details class="toggle">
+<summary>Materi Pengantar</summary>
+<div class="toggle-body"><p>Field adalah ring tempat pembagian aman dilakukan. Di field, setiap elemen yang bukan nol punya invers perkalian. Jadi kalau \(a\neq0\), ada \(a^{-1}\) sehingga \(aa^{-1}=1\).</p><p>Daerah integral adalah ring tanpa pembagi nol. Artinya, jika \(ab=0\), maka salah satu dari \(a\) atau \(b\) harus nol. Ini mencegah kejadian aneh seperti dua bilangan bukan nol menghasilkan nol.</p><div class="formula">\[
+\mathbb Z_p\text{ adalah field jika dan hanya jika }p\text{ prima}
+\]</div><p>Contoh: \(\mathbb Z_{11}\) adalah field karena 11 prima. Tetapi \(\mathbb Z_9\) bukan daerah integral karena \(3\cdot3=9\equiv0\pmod9\), padahal 3 bukan nol.</p><section class="intro-note-section"><h4>Kenapa topik ini muncul?</h4><p>Daerah integral dan field muncul sebagai jawaban atas masalah pembagi nol. Jika ring mengizinkan dua elemen bukan nol menghasilkan nol, maka pembagian dan pembatalan faktor menjadi berbahaya.</p><p>Daerah integral menghapus bahaya pembagi nol. Field melangkah lebih jauh: bukan hanya bebas pembagi nol, tetapi setiap elemen bukan nol juga punya invers perkalian.</p></section><div class="example-box"><h3>Field berhingga</h3>
+<p>Field berhingga bisa dibuat dari polinomial. Di komputer, ini sangat berguna karena data disimpan sebagai bit. Misalnya, byte bisa dipandang sebagai polinomial dengan koefisien 0 dan 1.</p>
+<div class="formula">\[
+\mathbb F_{2^m}\cong \mathbb F_2[x]/(p(x))
+\]</div>
+</div>
+<div class="illustration-box">
+<h4>Visual bantu: field membuat pembagian aman</h4>
+<svg aria-label="Diagram field dan invers" class="concept-svg" role="img" viewbox="0 0 720 250">
+<rect fill="#ecfdf5" height="140" rx="16" stroke="#86efac" width="260" x="70" y="55"></rect>
+<rect fill="#fee2e2" height="140" rx="16" stroke="#fca5a5" width="260" x="390" y="55"></rect>
+<text fill="#172033" font-size="18" font-weight="700" text-anchor="middle" x="200" y="86">Z₇</text>
+<text fill="#172033" font-size="18" font-weight="700" text-anchor="middle" x="520" y="86">Z₉</text>
+<text fill="#047857" font-size="22" text-anchor="middle" x="200" y="128">3 × 5 = 1</text>
+<text fill="#64748b" font-size="15" text-anchor="middle" x="200" y="158">3 punya invers 5</text>
+<text fill="#b91c1c" font-size="22" text-anchor="middle" x="520" y="128">3 × 3 = 0</text>
+<text fill="#64748b" font-size="15" text-anchor="middle" x="520" y="158">ada pembagi nol</text>
+<text fill="#64748b" font-size="16" text-anchor="middle" x="360" y="225">Field seperti Z₇ aman untuk membagi; Z₉ tidak.</text>
+</svg>
+<p class="svg-caption">Dalam field, setiap elemen bukan nol punya invers. Karena itu persamaan ax=b dapat diselesaikan.</p>
+</div>
+<div class="application-box"><h3>Aplikasi nyata dan koneksinya</h3><p>Field memberi lingkungan hitung yang sangat stabil. Di dalam field, persamaan linear dapat diselesaikan dengan membagi oleh koefisien bukan nol. Sifat ini penting karena banyak konstruksi aljabar membutuhkan operasi yang bisa dibalik dengan rapi, bukan hanya operasi yang tertutup.</p><p>Daerah integral dan field berbeda pada kekuatan jaminannya. Daerah integral menjamin tidak ada hasil kali nol dari dua elemen bukan nol. Field menjamin setiap elemen bukan nol dapat dipakai sebagai pembagi. Jadi semua field adalah daerah integral, tetapi tidak semua daerah integral adalah field.</p></div>
+<div class="summary-box">
+<h3>Ringkasan agar tidak tersesat</h3>
+<div class="summary-grid"><div><strong>Inti:</strong><br/>Field membuat pembagian oleh elemen bukan nol aman.</div><div><strong>Aturan penting:</strong><br/>Daerah integral tidak punya pembagi nol.</div><div><strong>Yang dicek:</strong><br/>Zp menjadi field jika p prima.</div></div>
+<div class="mistake-inside-box">
+<h4>Kesalahan umum</h4>
+<ul><li>Mengira Z_n selalu field. Z_n field hanya jika n prima.</li><li>Mengira field berhingga hanya pendekatan. Field berhingga adalah struktur aljabar yang tepat.</li><li>Lupa bahwa pembagi nol menghancurkan pembagian yang aman.</li></ul>
+</div>
+<div class="mini-visual-box">
+<h4>Bagian rawan bingung: field vs non-field</h4>
+<svg aria-label="Field dibandingkan non-field" class="mini-svg" role="img" viewbox="0 0 520 170">
+<rect fill="#ecfdf5" height="100" rx="14" stroke="#86efac" width="195" x="45" y="38"></rect>
+<text font-size="16" font-weight="700" text-anchor="middle" x="142" y="66">Z₇</text>
+<text fill="#047857" font-size="20" text-anchor="middle" x="142" y="99">1,2,3,4,5,6</text>
+<text fill="#64748b" font-size="12" text-anchor="middle" x="142" y="121">semua punya invers</text>
+<rect fill="#fee2e2" height="100" rx="14" stroke="#fca5a5" width="195" x="280" y="38"></rect>
+<text font-size="16" font-weight="700" text-anchor="middle" x="377" y="66">Z₉</text>
+<text fill="#b91c1c" font-size="20" text-anchor="middle" x="377" y="99">3 × 3 = 0</text>
+<text fill="#64748b" font-size="12" text-anchor="middle" x="377" y="121">ada pembagi nol</text>
+</svg>
+<p>Field menjamin invers untuk semua elemen bukan nol. Jika ada pembagi nol, sistem tidak bisa menjadi field.</p>
+</div>
+</div>
+<div class="complete-box">
+<h3>Inti konsep yang harus dibawa pulang</h3>
+<p>Field adalah sistem hitung yang aman untuk membagi oleh elemen bukan nol. Daerah integral sudah menghilangkan pembagi nol, tetapi field memberi jaminan lebih kuat dengan menyediakan invers untuk semua elemen bukan nol. Perbedaan ini penting karena banyak sistem aljabar membutuhkan operasi yang bukan hanya tertutup, tetapi juga dapat dibalik.</p>
+</div>
+<div class="source-box">
+<h3>Pelajari lebih lanjut</h3>
+<ul class="source-list"><li><a href="https://eprints.upgris.ac.id/637/1/Buku%20Teori%20Ring.pdf" rel="noopener" target="_blank">Materi terkait Bahasa Indonesia: daerah integral dan field</a></li>
+<li><a href="https://repo.uinsatu.ac.id/33242/1/STRUKTUR%20ALJABAR%20%28Bapak%20muniri%29.pdf" rel="noopener" target="_blank">Buku Indonesia: daerah integral dan lapangan</a></li>
+<li><a href="https://tahtamedia.co.id/index.php/issj/article/download/1162/1160/4274" rel="noopener" target="_blank">Buku Indonesia: daerah integral dan lapangan</a></li>
+<li><a href="https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.197-upd1.pdf" rel="noopener" target="_blank">NIST FIPS 197, AES finite field GF(2^8)</a></li>
+<li><a href="https://ntrs.nasa.gov/citations/19770026931" rel="noopener" target="_blank">NASA NTRS, finite fields and Reed-Solomon coding</a></li></ul>
+</div>
+</div></details>
+<details class="toggle">
+<summary>Lab 1 dan kuis</summary>
+<div class="toggle-body"><div class="lab" id="field1">
+<div class="lab-title"><h3><span class="pill blue lab-name-pill">Lab 7A. Mini Lab Aritmetika Byte AES</span></h3></div><div class="lab-sense-box"><h4>Cara membaca lab dan widget ini</h4><p>Gunakan widget untuk membedakan dua pertanyaan: apakah ada pembagi nol, dan apakah setiap elemen bukan nol punya invers. Dua pertanyaan ini memisahkan ring biasa, daerah integral, dan field.</p></div>
+<p class="lab-objective"><strong>Tujuan lab:</strong> Gunakan versi kecil field biner untuk memahami ide operasi byte.</p>
+<p class="predict-box"><strong>Sebelum klik tombol:</strong> tebak dulu hasilnya, lalu bandingkan dengan visualisasi.</p>
+<h4>Cerita penerapan</h4><p>AES memperlakukan byte sebagai elemen field berhingga. Lab ini memakai GF(2^4), bukan GF(2^8), agar setiap langkah reduksi mudah dilihat.</p>
+<h4>Teori dasar</h4><p>Bit menjadi koefisien polinomial. Penjumlahan dilakukan modulo 2. Perkalian adalah perkalian polinomial, lalu direduksi dengan polinomial irreducible.</p>
+<div class="formula">\(\mathbb F_{2^4}\cong \mathbb F_2[x]/(x^4+x+1)\)</div>
+<div class="two"><div><label>a, dari 0 sampai 15</label><input id="field1_a" type="number" value="11"/><label>b, dari 0 sampai 15</label><input id="field1_b" type="number" value="7"/><button onclick="field1()">Kalikan di GF(2^4)</button></div><div><div class="svgbox" id="field1_svg"></div><div class="result" id="field1_out"></div></div></div>
+<div class="quiz"><h4>Cek pemahaman</h4>
+<div class="quiz-item">
+<p><strong>P1.</strong> Di GF(2), berapa 1+1?</p>
+<input id="field1_q1" placeholder="Tulis jawabanmu"/>
+<button onclick="checkQuiz('field1',1)">Cek</button>
+<div class="feedback hint" id="field1_f1"></div>
+</div>
+<div class="quiz-item">
+<p><strong>P2.</strong> Mengapa AES memakai aritmetika field berhingga, bukan aritmetika bilangan bulat biasa?</p>
+<textarea id="field1_q2" placeholder="Tulis jawaban dan alasanmu"></textarea>
+<button onclick="checkQuiz('field1',2)">Cek</button>
+<div class="feedback hint" id="field1_f2"></div>
+</div>
+</div>
+</div></div>
+</details>
+<details class="toggle">
+<summary>Lab 2 dan kuis</summary>
+<div class="toggle-body"><div class="lab" id="field2">
+<div class="lab-title"><h3><span class="pill blue lab-name-pill">Lab 7B. Pemulihan Data di Atas Field</span></h3></div><div class="lab-sense-box"><h4>Cara membaca lab dan widget ini</h4><p>Gunakan widget sebagai pengantar ke field berhingga. Fokusnya bukan detail teknologi yang kompleks, tetapi alasan mengapa sistem kecil yang bisa dibalik sangat berguna.</p></div>
+<p class="lab-objective"><strong>Tujuan lab:</strong> Selesaikan persamaan modulo prima memakai invers.</p>
+<p class="predict-box"><strong>Sebelum klik tombol:</strong> tebak dulu hasilnya, lalu bandingkan dengan visualisasi.</p>
+<h4>Cerita penerapan</h4><p>Sistem penyimpanan membagi file ke beberapa server. Persamaan tambahan di atas field membantu memulihkan bagian yang hilang. Pembagian harus berjalan, jadi aritmetika dilakukan di field.</p>
+<h4>Teori dasar</h4><p>Z_p adalah field jika p prima. Di field, setiap koefisien bukan nol punya invers, sehingga persamaan seperti ax=b dapat diselesaikan dengan andal.</p>
+<div class="formula">\(\mathbb Z_p\text{ adalah field}\iff p\text{ prima}\)</div>
+<div class="two"><div><label>p</label><input id="field2_p" type="number" value="7"/><label>Persamaan ax=b</label><input id="field2_eq" value="3,5"/><button onclick="field2()">Selesaikan di Z_p</button></div><div><div class="svgbox" id="field2_svg"></div><div class="result" id="field2_out"></div></div></div>
+<div class="quiz"><h4>Cek pemahaman</h4>
+<div class="quiz-item">
+<p><strong>P1.</strong> Apakah Z11 adalah field? Jelaskan singkat.</p>
+<textarea id="field2_q1" placeholder="Tulis jawaban dan alasanmu"></textarea>
+<button onclick="checkQuiz('field2',1)">Cek</button>
+<div class="feedback hint" id="field2_f1"></div>
+</div>
+<div class="quiz-item">
+<p><strong>P2.</strong> Apakah Z9 adalah daerah integral? Berikan contoh bantahan.</p>
+<textarea id="field2_q2" placeholder="Tulis jawaban dan alasanmu"></textarea>
+<button onclick="checkQuiz('field2',2)">Cek</button>
+<div class="feedback hint" id="field2_f2"></div>
+</div>
+</div>
+</div></div>
+</details>
+<div class="bottom-home-link"><a href="index.html">← Kembali ke Beranda</a></div>
+</main>
+<footer>Rumus dirender memakai MathJax v3 dengan output SVG. Buka dengan akses internet agar rumus tampil rapi.</footer>
+<script src="app.js"></script>
+</body>
+</html>

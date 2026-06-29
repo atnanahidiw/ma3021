@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+
+<html lang="id">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>8. Homomorfisma Ring dan Ideal | Lab MA3021</title>
+<link href="styles.css" rel="stylesheet"/>
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']], processEscapes: true },
+  svg: { fontCache: 'global' },
+  startup: { typeset: true }
+};
+</script>
+<script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+<body>
+<header><div class="header-inner">
+<h1>8. Homomorfisma Ring dan Ideal</h1>
+<p>Dari kode siklik sampai kernel sebagai ideal</p>
+</div></header>
+<main>
+<details class="toggle">
+<summary>Materi Pengantar</summary>
+<div class="toggle-body"><p>Ideal adalah subset khusus di dalam ring. Ia harus stabil saat dikalikan dengan elemen ring dari luar. Dengan kata lain, ideal “menyerap” perkalian dari ring.</p><div class="formula">\[
+I\triangleleft R \iff rI\subseteq I\text{ dan }Ir\subseteq I
+\]</div><p>Bahasa sederhananya: jika \(i\) ada di ideal \(I\), lalu dikalikan dengan elemen ring mana pun \(r\), hasilnya harus tetap berada di \(I\).</p><section class="intro-note-section"><h4>Kenapa topik ini muncul?</h4><p>Ideal muncul karena subring biasa belum cukup kuat untuk membangun quotient ring. Kita membutuhkan subset yang tetap stabil bukan hanya terhadap operasi di dalamnya, tetapi juga terhadap perkalian oleh elemen ring dari luar.</p><p>Sifat ini disebut absorpsi. Ideal menyerap perkalian dari ring: jika sebuah elemen berada di ideal, maka ketika dikalikan oleh elemen mana pun dari ring, hasilnya tetap berada di ideal.</p></section><div class="example-box"><h3>Kernel homomorfisma ring</h3>
+<p>Homomorfisma ring adalah peta yang menjaga penjumlahan dan perkalian. Kernel-nya adalah semua elemen yang dipetakan ke nol.</p>
+<div class="formula">\[
+\ker\varphi=\{r\in R:\varphi(r)=0\}
+\]</div>
+<p>Fakta penting: kernel dari homomorfisma ring selalu merupakan ideal. Ini mirip dengan kernel homomorfisma grup yang selalu merupakan subgrup normal.</p>
+</div>
+<div class="illustration-box">
+<h4>Visual bantu: kode siklik sebagai geser melingkar</h4>
+<svg aria-label="Diagram kode siklik sebagai geser bit" class="concept-svg" role="img" viewbox="0 0 720 250">
+<defs><marker id="arr8" markerheight="7" markerwidth="7" orient="auto" refx="9" refy="5" viewbox="0 0 10 10"><path d="M0 0 L10 5 L0 10 Z" fill="#2563eb"></path></marker></defs>
+<g transform="translate(70,80)">
+<rect fill="#dbeafe" height="52" rx="10" stroke="#2563eb" width="52" x="0" y="0"></rect><text font-size="21" text-anchor="middle" x="26" y="34">1</text>
+<rect fill="#eff6ff" height="52" rx="10" stroke="#93c5fd" width="52" x="62" y="0"></rect><text font-size="21" text-anchor="middle" x="88" y="34">0</text>
+<rect fill="#dbeafe" height="52" rx="10" stroke="#2563eb" width="52" x="124" y="0"></rect><text font-size="21" text-anchor="middle" x="150" y="34">1</text>
+<rect fill="#dbeafe" height="52" rx="10" stroke="#2563eb" width="52" x="186" y="0"></rect><text font-size="21" text-anchor="middle" x="212" y="34">1</text>
+</g>
+<line marker-end="url(#arr8)" stroke="#2563eb" stroke-width="4" x1="335" x2="420" y1="106" y2="106"></line>
+<text fill="#64748b" font-size="15" text-anchor="middle" x="378" y="88">geser</text>
+<g transform="translate(450,80)">
+<rect fill="#dbeafe" height="52" rx="10" stroke="#2563eb" width="52" x="0" y="0"></rect><text font-size="21" text-anchor="middle" x="26" y="34">1</text>
+<rect fill="#dbeafe" height="52" rx="10" stroke="#2563eb" width="52" x="62" y="0"></rect><text font-size="21" text-anchor="middle" x="88" y="34">1</text>
+<rect fill="#eff6ff" height="52" rx="10" stroke="#93c5fd" width="52" x="124" y="0"></rect><text font-size="21" text-anchor="middle" x="150" y="34">0</text>
+<rect fill="#dbeafe" height="52" rx="10" stroke="#2563eb" width="52" x="186" y="0"></rect><text font-size="21" text-anchor="middle" x="212" y="34">1</text>
+</g>
+<text fill="#64748b" font-size="16" text-anchor="middle" x="360" y="205">Ideal menjelaskan mengapa kumpulan codeword stabil terhadap operasi seperti ini.</text>
+</svg>
+<p class="svg-caption">Codeword valid tetap valid setelah digeser. Secara aljabar, geser sama seperti kali x modulo xⁿ−1.</p>
+</div>
+<div class="application-box"><h3>Aplikasi nyata dan koneksinya</h3><p>Ideal dapat dipahami sebagai subset yang tidak bocor keluar ketika terkena perkalian dari seluruh ring. Ini berbeda dari subset biasa. Subset biasa mungkin tertutup terhadap operasi di dalam dirinya, tetapi ideal harus tetap stabil walaupun ring di luar subset ikut mengalikan elemennya. Syarat ini membuat ideal cocok menjadi dasar quotient ring.</p><p>Kernel homomorfisma ring selalu ideal karena semua elemen yang dipetakan ke nol tetap runtuh ke nol setelah dikalikan oleh elemen ring. Inilah hubungan pentingnya: ideal bukan hanya objek tambahan, tetapi struktur yang muncul secara alami ketika suatu pemetaan ring kehilangan informasi menuju nol. Dalam kode siklik, gagasan stabilitas yang sama membantu menjelaskan mengapa kumpulan codeword tetap valid setelah operasi tertentu.</p></div>
+<div class="summary-box">
+<h3>Ringkasan agar tidak tersesat</h3>
+<div class="summary-grid"><div><strong>Inti:</strong><br/>Ideal adalah subset ring yang menyerap perkalian dari luar.</div><div><strong>Aturan penting:</strong><br/>Kernel homomorfisma ring selalu ideal.</div><div><strong>Yang dicek:</strong><br/>Kode siklik dapat dipahami lewat ring polinomial hasil bagi.</div></div>
+<div class="mistake-inside-box">
+<h4>Kesalahan umum</h4>
+<ul><li>Mengira ideal sama seperti subring biasa. Ideal punya syarat absorpsi.</li><li>Mengira geser siklik hanya animasi bit. Secara aljabar, geser berkaitan dengan perkalian oleh x.</li><li>Lupa bahwa kernel homomorfisma ring bukan hanya himpunan biasa, tetapi ideal.</li></ul>
+</div>
+<p class="summary-note">Cara cepat mengingat: ideal adalah bagian ring yang tidak bocor keluar ketika dikalikan oleh elemen ring mana pun.</p><div class="mini-visual-box">
+<h4>Bagian rawan bingung: absorpsi ideal</h4>
+<svg aria-label="Ideal menyerap perkalian dari luar" class="mini-svg" role="img" viewbox="0 0 520 170">
+<defs><marker id="m8" markerheight="6" markerwidth="6" orient="auto" refx="9" refy="5" viewbox="0 0 10 10"><path d="M0 0 L10 5 L0 10 Z" fill="#2563eb"></path></marker></defs>
+<ellipse cx="260" cy="88" fill="#f8fafc" rx="165" ry="58" stroke="#94a3b8"></ellipse>
+<ellipse cx="260" cy="88" fill="#ecfdf5" rx="78" ry="32" stroke="#16a34a"></ellipse>
+<text font-size="16" font-weight="700" text-anchor="middle" x="260" y="92">Ideal I</text>
+<text fill="#172033" font-size="14" x="115" y="48">Ring R</text>
+<circle cx="135" cy="88" fill="#dbeafe" r="12" stroke="#2563eb"></circle><text font-size="12" x="131" y="93">r</text>
+<circle cx="250" cy="88" fill="#dcfce7" r="12" stroke="#16a34a"></circle><text font-size="12" x="247" y="93">i</text>
+<line marker-end="url(#m8)" stroke="#2563eb" stroke-width="2.5" x1="150" x2="235" y1="88" y2="88"></line>
+<text fill="#64748b" font-size="13" text-anchor="middle" x="260" y="153">r · i tetap jatuh di dalam I.</text>
+</svg>
+<p>Ideal bukan hanya kumpulan elemen. Jika i ada di ideal dan r dari ring mana saja, maka r·i tetap masuk ideal.</p>
+</div>
+</div>
+<div class="complete-box">
+<h3>Inti konsep yang harus dibawa pulang</h3>
+<p>Ideal adalah subset ring yang stabil terhadap perkalian dari luar. Penjelasan ini lebih kuat daripada sekadar bagian ring: ideal harus menyerap elemen ring sehingga hasil perkalian tetap berada di dalamnya. Karena sifat ini, ideal menjadi kernel alami dari homomorfisma ring dan menjadi alat penting untuk membangun quotient ring. Intinya, ideal memberi cara aman untuk merangkum ring tanpa membuat operasi perkalian menjadi tidak konsisten.</p>
+</div>
+<div class="source-box">
+<h3>Pelajari lebih lanjut</h3>
+<ul class="source-list"><li><a href="https://strukturaljabar.mipa.ugm.ac.id/wp-content/uploads/sites/372/2020/11/KUA-Seri-4-Sesi-1.pdf" rel="noopener" target="_blank">Materi terkait Bahasa Indonesia: ideal dan ring faktor</a></li>
+<li><a href="https://eprints.upgris.ac.id/637/1/Buku%20Teori%20Ring.pdf" rel="noopener" target="_blank">Buku Indonesia: homomorfisma ring dan ideal</a></li>
+<li><a href="https://repo.uinsatu.ac.id/33242/1/STRUKTUR%20ALJABAR%20%28Bapak%20muniri%29.pdf" rel="noopener" target="_blank">Buku Indonesia: ideal dalam struktur aljabar</a></li>
+<li><a href="https://ocw.mit.edu/courses/6-451-principles-of-digital-communication-ii-spring-2005/01060b08ba74792ee8d85eb82b9efdb4_chap8.pdf" rel="noopener" target="_blank">MIT OCW Reed-Solomon codes chapter</a></li>
+<li><a href="https://ntrs.nasa.gov/citations/19770026931" rel="noopener" target="_blank">NASA NTRS, finite fields and Reed-Solomon coding</a></li></ul>
+</div>
+</div></details>
+<details class="toggle">
+<summary>Lab 1 dan kuis</summary>
+<div class="toggle-body"><div class="lab" id="ideal1">
+<div class="lab-title"><h3><span class="pill blue lab-name-pill">Lab 8A. Register Geser Kode Siklik</span></h3></div><div class="lab-sense-box"><h4>Cara membaca lab dan widget ini</h4><p>Gunakan widget dan visual untuk memperhatikan stabilitas. Pertanyaannya bukan hanya apakah elemen berada di dalam kumpulan, tetapi apakah operasi dari luar tetap menjaga hasil di dalam kumpulan itu.</p></div>
+<p class="lab-objective"><strong>Tujuan lab:</strong> Hubungkan geser bit dengan perkalian oleh x modulo x^n−1.</p>
+<p class="predict-box"><strong>Sebelum klik tombol:</strong> tebak dulu hasilnya, lalu bandingkan dengan visualisasi.</p>
+<h4>Cerita penerapan</h4><p>Kode siklik dipakai untuk memahami data biner yang tetap memiliki pola sama setelah digeser melingkar. Bayangkan kata kode <strong>101100</strong> ditulis di gelang melingkar. Jika bit paling kanan dipindah ke paling kiri, kita mendapat kata baru. Pada kode siklik, hasil geseran seperti ini masih berada di keluarga kode yang sama.</p>
+<p>Tujuan lab ini adalah membuat hubungan itu terlihat: geser bit, lihat polinomialnya berubah, lalu hubungkan dengan operasi aljabar. Geser kanan satu langkah sama seperti mengalikan polinomial codeword dengan \(x\), lalu mereduksi dengan aturan \(x^n=1\), atau modulo \(x^n-1\).</p>
+<h4>Teori dasar</h4><p>Kata kode biner \((c_0,c_1,\ldots,c_{n-1})\) dapat dibaca sebagai polinomial \(c_0+c_1x+\cdots+c_{n-1}x^{n-1}\). Saat codeword digeser melingkar, pangkat-pangkat polinomial ikut berputar. Karena kita bekerja modulo \(x^n-1\), suku \(x^n\) kembali menjadi 1.</p>
+<p>Ideal menyerap perkalian oleh elemen ring. Dalam ring hasil bagi polinomial, ini menjelaskan mengapa kumpulan codeword pada kode siklik tetap stabil ketika dikalikan oleh \(x\), yaitu ketika digeser melingkar.</p>
+<div class="formula">\(I\triangleleft R,\quad rI\subseteq I,\quad \mathbb F_q[x]/(x^n-1)\)</div>
+<div class="two"><div>
+<p class="hint"><strong>Tujuan lab:</strong> klik panah di gambar atau tombol geser untuk melihat bahwa geser siklik bukan sekadar animasi. Dalam bentuk polinomial, geser kanan satu langkah berarti mengalikan dengan \(x\) lalu memakai aturan \(x^n=1\).</p>
+<label>Kata kode biner</label><input id="ideal1_word" oninput="ideal1()" value="101100"/>
+<label>Arah geser</label><select id="ideal1_dir" onchange="ideal1()"><option value="right">Kanan: bit terakhir pindah ke depan</option><option value="left">Kiri: bit pertama pindah ke belakang</option></select>
+<label>Jumlah langkah</label><input id="ideal1_steps" min="1" oninput="ideal1()" type="number" value="1"/>
+<button onclick="ideal1Step()">Geser satu langkah</button><button class="secondary" onclick="ideal1()">Hitung ulang</button>
+</div><div><div class="svgbox" id="ideal1_svg"></div><div class="result" id="ideal1_out"></div></div></div>
+<div class="quiz"><h4>Cek pemahaman</h4>
+<div class="quiz-item">
+<p><strong>P1.</strong> Tuliskan syarat absorpsi untuk ideal.</p>
+<textarea id="ideal1_q1" placeholder="Tulis jawaban dan alasanmu"></textarea>
+<button onclick="checkQuiz('ideal1',1)">Cek</button>
+<div class="feedback hint" id="ideal1_f1"></div>
+</div>
+<div class="quiz-item">
+<p><strong>P2.</strong> Mengapa kode siklik berhubungan dengan ring polinomial hasil bagi?</p>
+<textarea id="ideal1_q2" placeholder="Tulis jawaban dan alasanmu"></textarea>
+<button onclick="checkQuiz('ideal1',2)">Cek</button>
+<div class="feedback hint" id="ideal1_f2"></div>
+</div>
+</div>
+</div></div>
+</details>
+<details class="toggle">
+<summary>Lab 2 dan kuis</summary>
+<div class="toggle-body"><div class="lab" id="ideal2">
+<div class="lab-title"><h3><span class="pill blue lab-name-pill">Lab 8B. Kernel sebagai Ideal pada Sistem Modulo</span></h3></div><div class="lab-sense-box"><h4>Cara membaca lab dan widget ini</h4><p>Gunakan widget untuk membaca absorpsi. Jika i berada di ideal dan r berasal dari ring, hasil r·i harus tetap berada di ideal. Itulah syarat yang membedakan ideal dari subset biasa.</p></div>
+<p class="lab-objective"><strong>Tujuan lab:</strong> Lihat kernel homomorfisma ring sebagai ideal.</p>
+<p class="predict-box"><strong>Sebelum klik tombol:</strong> tebak dulu hasilnya, lalu bandingkan dengan visualisasi.</p>
+<h4>Cerita penerapan</h4><p>Sistem pemantauan memetakan penghitung detail modulo 12 ke dashboard modulo 4 yang lebih kecil. Nilai yang berubah menjadi 0 membentuk kernel. Untuk ring, kernel ini adalah ideal.</p>
+<h4>Teori dasar</h4><p>Homomorfisma ring menjaga penjumlahan dan perkalian. Kernel-nya selalu merupakan ideal.</p>
+<div class="formula">\(\ker\varphi=\{r\in R:\varphi(r)=0\},\quad \ker\varphi\triangleleft R\)</div>
+<div class="two"><div><label>Peta φ: Z_n ke Z_m, φ(x)=x mod m</label><input id="ideal2_n" type="number" value="12"/><input id="ideal2_m" type="number" value="4"/><button onclick="ideal2()">Cari kernel dan uji ideal</button></div><div><div class="svgbox" id="ideal2_svg"></div><div class="result" id="ideal2_out"></div></div></div>
+<div class="quiz"><h4>Cek pemahaman</h4>
+<div class="quiz-item">
+<p><strong>P1.</strong> Untuk peta Z12 ke Z4 dengan x mod 4, tuliskan kernel-nya.</p>
+<input id="ideal2_q1" placeholder="Tulis jawabanmu"/>
+<button onclick="checkQuiz('ideal2',1)">Cek</button>
+<div class="feedback hint" id="ideal2_f1"></div>
+</div>
+<div class="quiz-item">
+<p><strong>P2.</strong> Objek aljabar apa yang menjadi kernel dari homomorfisma ring?</p>
+<input id="ideal2_q2" placeholder="Tulis jawabanmu"/>
+<button onclick="checkQuiz('ideal2',2)">Cek</button>
+<div class="feedback hint" id="ideal2_f2"></div>
+</div>
+</div>
+</div></div>
+</details>
+<div class="bottom-home-link"><a href="index.html">← Kembali ke Beranda</a></div>
+</main>
+<footer>Rumus dirender memakai MathJax v3 dengan output SVG. Buka dengan akses internet agar rumus tampil rapi.</footer>
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+
+<html lang="id">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>6. Ring | Lab MA3021</title>
+<link href="styles.css" rel="stylesheet"/>
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']], processEscapes: true },
+  svg: { fontCache: 'global' },
+  startup: { typeset: true }
+};
+</script>
+<script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+<body>
+<header><div class="header-inner">
+<h1>6. Ring</h1>
+<p>Dari komputasi modulo sampai pembagi nol</p>
+</div></header>
+<main>
+<details class="toggle">
+<summary>Materi Pengantar</summary>
+<div class="toggle-body"><p>Ring adalah struktur dengan dua operasi: penjumlahan dan perkalian. Ini membuat ring terasa mirip aritmetika biasa, tetapi aturannya lebih umum. Contoh paling mudah adalah \(\mathbb Z_n\), yaitu bilangan modulo \(n\).</p><p>Di \(\mathbb Z_n\), penjumlahan dan perkalian dilakukan seperti biasa, lalu hasilnya diambil sisanya modulo \(n\).</p><div class="formula">\[
+a(b+c)=ab+ac
+\]</div><p>Rumus ini disebut hukum distributif. Artinya, perkalian harus cocok dengan penjumlahan. Tanpa aturan ini, operasi ring tidak bisa dipakai untuk menyederhanakan ekspresi dengan aman.</p><section class="intro-note-section"><h4>Kenapa topik ini muncul?</h4><p>Ring muncul ketika satu operasi tidak cukup untuk menjelaskan struktur hitung. Grup hanya memerlukan satu operasi, sedangkan ring menempatkan tambah dan kali dalam satu dunia yang sama.</p><p>Kehadiran dua operasi membuat pertanyaannya lebih kaya. Kita tidak hanya bertanya apakah operasi tertutup, tetapi juga apakah perkalian cocok dengan penjumlahan melalui distributivitas, dan apakah pembagian bisa dilakukan dengan aman.</p></section><div class="example-box"><h3>Unit dan pembagi nol</h3>
+<p>Unit adalah elemen yang punya invers perkalian. Di \(\mathbb Z_n\), elemen \(a\) menjadi unit jika \(\gcd(a,n)=1\).</p>
+<div class="formula">\[
+U(\mathbb Z_n)=\{a\in\mathbb Z_n:\gcd(a,n)=1\}
+\]</div>
+<p>Pembagi nol adalah elemen bukan nol yang jika dikalikan dengan elemen bukan nol lain bisa menghasilkan nol. Contoh: di \(\mathbb Z_6\), \(2\cdot3=6\equiv0\). Jadi 2 dan 3 adalah pembagi nol.</p>
+</div>
+<div class="illustration-box">
+<h4>Visual bantu: ring punya tambah dan kali</h4>
+<svg aria-label="Diagram ring dan pembagi nol" class="concept-svg" role="img" viewbox="0 0 720 250">
+<rect fill="#eff6ff" height="150" rx="16" stroke="#93c5fd" width="260" x="70" y="45"></rect>
+<rect fill="#fff7ed" height="150" rx="16" stroke="#fdba74" width="260" x="390" y="45"></rect>
+<text fill="#172033" font-size="18" font-weight="700" text-anchor="middle" x="200" y="78">Tambah modulo 6</text>
+<text fill="#172033" font-size="18" font-weight="700" text-anchor="middle" x="520" y="78">Kali modulo 6</text>
+<text fill="#172033" font-size="24" text-anchor="middle" x="200" y="125">5 + 1 = 0</text>
+<text fill="#64748b" font-size="15" text-anchor="middle" x="200" y="156">nilai berputar</text>
+<text fill="#b91c1c" font-size="24" text-anchor="middle" x="520" y="125">2 × 3 = 0</text>
+<text fill="#64748b" font-size="15" text-anchor="middle" x="520" y="156">pembagi nol</text>
+<text fill="#64748b" font-size="16" text-anchor="middle" x="360" y="225">Ring memaksa tambah dan kali hidup dalam sistem yang sama.</text>
+</svg>
+<p class="svg-caption">Di Z₆, 2 dan 3 bukan nol, tetapi 2×3 menjadi 0. Ini pembagi nol.</p>
+</div>
+<div class="application-box"><h3>Aplikasi nyata dan koneksinya</h3><p>Ring memperlihatkan bahwa sistem hitung dapat memiliki aturan yang mirip bilangan biasa, tetapi tidak identik. Penjumlahan bisa berjalan rapi, perkalian bisa berjalan rapi, namun pembagian belum tentu tersedia. Inilah alasan konsep unit dan pembagi nol penting: keduanya menunjukkan mana bagian yang bisa dibalik dan mana bagian yang bisa merusak pembatalan.</p><p>Pembagi nol adalah tanda bahwa intuisi aritmetika biasa tidak selalu berlaku. Dalam bilangan bulat, hasil kali dua bilangan bukan nol tidak mungkin nol. Dalam ring tertentu, hal itu bisa terjadi. Karena itu ring mengajarkan kehati-hatian: sebelum membagi atau membatalkan faktor, kita harus tahu struktur tempat kita berhitung.</p></div>
+<div class="summary-box">
+<h3>Ringkasan agar tidak tersesat</h3>
+<div class="summary-grid"><div><strong>Inti:</strong><br/>Ring punya dua operasi: tambah dan kali.</div><div><strong>Aturan penting:</strong><br/>Unit adalah elemen yang punya invers perkalian.</div><div><strong>Yang dicek:</strong><br/>Pembagi nol membuat pembagian tidak selalu aman.</div></div>
+<div class="mistake-inside-box">
+<h4>Kesalahan umum</h4>
+<ul><li>Mengira semua ring punya pembagian. Ring belum tentu field.</li><li>Mengira dua bilangan bukan nol tidak mungkin menghasilkan nol. Di Z6, 2·3=0.</li><li>Lupa bahwa ring harus membuat tambah dan kali cocok melalui distributivitas.</li></ul>
+</div>
+<div class="mini-visual-box">
+<h4>Bagian rawan bingung: pembagi nol</h4>
+<svg aria-label="Pembagi nol di Z6" class="mini-svg" role="img" viewbox="0 0 520 160">
+<rect fill="#fff7ed" height="90" rx="16" stroke="#fdba74" width="380" x="70" y="38"></rect>
+<text font-size="18" font-weight="700" text-anchor="middle" x="260" y="70">Di Z₆</text>
+<text fill="#b91c1c" font-size="26" text-anchor="middle" x="260" y="103">2 × 3 ≡ 0</text>
+<text fill="#64748b" font-size="13" text-anchor="middle" x="260" y="135">2 ≠ 0 dan 3 ≠ 0, tetapi hasilnya 0.</text>
+</svg>
+<p>Pembagi nol membuat aturan bilangan biasa gagal: dua elemen bukan nol dapat menghasilkan nol.</p>
+</div>
+</div>
+<div class="complete-box">
+<h3>Inti konsep yang harus dibawa pulang</h3>
+<p>Ring adalah struktur dengan dua operasi yang saling cocok: tambah dan kali. Ia cukup mirip dengan bilangan biasa untuk terasa akrab, tetapi cukup berbeda untuk menghasilkan fenomena baru seperti unit dan pembagi nol. Memahami ring berarti memahami kapan aturan hitung biasa masih aman dipakai dan kapan aturan itu mulai gagal.</p>
+</div>
+<div class="source-box">
+<h3>Pelajari lebih lanjut</h3>
+<ul class="source-list"><li><a href="https://eprints.upgris.ac.id/637/1/Buku%20Teori%20Ring.pdf" rel="noopener" target="_blank">Materi terkait Bahasa Indonesia: teori ring</a></li>
+<li><a href="https://strukturaljabar.mipa.ugm.ac.id/wp-content/uploads/sites/372/2020/11/KUA-Seri-4-Sesi-1.pdf" rel="noopener" target="_blank">Materi Indonesia: ideal dan ring faktor</a></li>
+<li><a href="https://repo.uinsatu.ac.id/33242/1/STRUKTUR%20ALJABAR%20%28Bapak%20muniri%29.pdf" rel="noopener" target="_blank">Buku Indonesia: ring dalam struktur aljabar</a></li>
+<li><a href="https://doc.sagemath.org/html/en/prep/quickstarts/abstract-algebra.html" rel="noopener" target="_blank">SageMath abstract algebra quickstart</a></li>
+<li><a href="https://www.gap-system.org/" rel="noopener" target="_blank">GAP, computational algebra system</a></li></ul>
+</div>
+</div></details>
+<details class="toggle">
+<summary>Lab 1 dan kuis</summary>
+<div class="toggle-body"><div class="lab" id="ring1">
+<div class="lab-title"><h3><span class="pill blue lab-name-pill">Lab 6A. Pencampur Warna LED Modulo n</span></h3></div><div class="lab-sense-box"><h4>Cara membaca lab dan widget ini</h4><p>Gunakan widget sebagai sistem hitung kecil. Perhatikan bahwa hasil operasi selalu kembali ke dunia yang sama, tetapi perilakunya bisa berbeda dari bilangan biasa.</p></div>
+<p class="lab-objective"><strong>Tujuan lab:</strong> Bedakan unit dan pembagi nol dalam Z_n.</p>
+<p class="predict-box"><strong>Sebelum klik tombol:</strong> tebak dulu hasilnya, lalu bandingkan dengan visualisasi.</p>
+<h4>Cerita penerapan</h4><p>Perangkat menyimpan nilai kecerahan modulo n. Penjumlahan membuat nilai berputar kembali. Perkalian dapat memodelkan penguatan berulang. Beberapa pengali tidak bisa dibalik.</p>
+<h4>Teori dasar</h4><p>Di Z_n, unit adalah nilai yang punya invers perkalian. Pembagi nol adalah nilai bukan nol yang bisa menghasilkan nol saat dikalikan dengan nilai bukan nol lain.</p>
+<div class="formula">\(U(\mathbb Z_n)=\{a:\gcd(a,n)=1\}\)</div>
+<div class="two"><div><label>n untuk Z_n</label><input id="ring1_n" type="number" value="12"/><button onclick="ring1()">Cari unit dan pembagi nol</button></div><div><div class="svgbox" id="ring1_svg"></div><div class="result" id="ring1_out"></div></div></div>
+<div class="quiz"><h4>Cek pemahaman</h4>
+<div class="quiz-item">
+<p><strong>P1.</strong> Tuliskan semua unit di Z8.</p>
+<input id="ring1_q1" placeholder="Tulis jawabanmu"/>
+<button onclick="checkQuiz('ring1',1)">Cek</button>
+<div class="feedback hint" id="ring1_f1"></div>
+</div>
+<div class="quiz-item">
+<p><strong>P2.</strong> Berikan contoh pembagi nol di Z6.</p>
+<textarea id="ring1_q2" placeholder="Tulis jawaban dan alasanmu"></textarea>
+<button onclick="checkQuiz('ring1',2)">Cek</button>
+<div class="feedback hint" id="ring1_f2"></div>
+</div>
+</div>
+</div></div>
+</details>
+<details class="toggle">
+<summary>Lab 2 dan kuis</summary>
+<div class="toggle-body"><div class="lab" id="ring2">
+<div class="lab-title"><h3><span class="pill blue lab-name-pill">Lab 6B. Papan Sirkuit Dua Operasi</span></h3></div><div class="lab-sense-box"><h4>Cara membaca lab dan widget ini</h4><p>Gunakan widget untuk membedakan elemen yang bisa dibalik dan elemen yang menyebabkan hilangnya informasi. Perbedaan ini adalah inti mengapa ring belum tentu field.</p></div>
+<p class="lab-objective"><strong>Tujuan lab:</strong> Lihat mengapa distributivitas membuat penjumlahan dan perkalian cocok.</p>
+<p class="predict-box"><strong>Sebelum klik tombol:</strong> tebak dulu hasilnya, lalu bandingkan dengan visualisasi.</p>
+<h4>Cerita penerapan</h4><p>Simulasi rangkaian dapat menggabungkan sinyal dengan penjumlahan dan perkalian. Hukum distributif membuat penyederhanaan ekspresi tetap aman.</p>
+<h4>Teori dasar</h4><p>Ring harus memenuhi distributivitas: perkalian menyebar terhadap penjumlahan dari kiri dan kanan.</p>
+<div class="formula">\(a(b+c)=ab+ac,\quad (a+b)c=ac+bc\)</div>
+<div class="two"><div><label>Z_n</label><input id="ring2_n" type="number" value="10"/><label>a,b,c</label><input id="ring2_vals" value="3,4,7"/><button onclick="ring2()">Cek distributivity</button><button class="secondary" onclick="ring2Tables()">Tampilkan tabel perkalian</button></div><div><div class="svgbox" id="ring2_svg"></div><div class="result" id="ring2_out"></div></div></div>
+<div class="quiz"><h4>Cek pemahaman</h4>
+<div class="quiz-item">
+<p><strong>P1.</strong> Mengapa Z6 bukan field?</p>
+<textarea id="ring2_q1" placeholder="Tulis jawaban dan alasanmu"></textarea>
+<button onclick="checkQuiz('ring2',1)">Cek</button>
+<div class="feedback hint" id="ring2_f1"></div>
+</div>
+<div class="quiz-item">
+<p><strong>P2.</strong> Hukum apa yang menghubungkan penjumlahan dan perkalian dalam ring?</p>
+<input id="ring2_q2" placeholder="Tulis jawabanmu"/>
+<button onclick="checkQuiz('ring2',2)">Cek</button>
+<div class="feedback hint" id="ring2_f2"></div>
+</div>
+</div>
+</div></div>
+</details>
+<div class="bottom-home-link"><a href="index.html">← Kembali ke Beranda</a></div>
+</main>
+<footer>Rumus dirender memakai MathJax v3 dengan output SVG. Buka dengan akses internet agar rumus tampil rapi.</footer>
+<script src="app.js"></script>
+</body>
+</html>

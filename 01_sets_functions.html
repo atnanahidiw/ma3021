@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+
+<html lang="id">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>1. Himpunan dan Fungsi | Lab MA3021</title>
+<link href="styles.css" rel="stylesheet"/>
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']], processEscapes: true },
+  svg: { fontCache: 'global' },
+  startup: { typeset: true }
+};
+</script>
+<script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+<body>
+<header><div class="header-inner">
+<h1>1. Himpunan dan Fungsi</h1>
+<p>Dari pemetaan data sampai komposisi fungsi</p>
+</div></header>
+<main>
+<details class="toggle">
+<summary>Materi Pengantar</summary>
+<div class="toggle-body"><p>Bayangkan kamu punya daftar nama siswa, lalu di sebelahnya ada pilihan kelas. Setiap siswa harus punya satu pilihan kelas yang jelas. Jika Andi tercatat masuk kelas A dan kelas B sekaligus untuk data yang sama, sistem menjadi bingung. Ini contoh paling sederhana dari masalah fungsi.</p><p>Dalam matematika, fungsi adalah aturan yang memasangkan setiap input ke tepat satu output. Input disebut anggota domain. Output berada di kodomain. Satu output boleh dipakai oleh beberapa input. Itu masih fungsi. Yang tidak boleh adalah satu input punya dua output berbeda.</p><div class="formula">\[
+f:A\to B
+\]</div><p>Rumus ini dibaca: fungsi \(f\) memetakan himpunan \(A\) ke himpunan \(B\). Kalau \(a\) adalah anggota \(A\), maka hasilnya ditulis \(f(a)\).</p><div class="formula">\[
+\forall a\in A,\ \exists! b\in B \text{ sehingga } f(a)=b
+\]</div><p>Simbol \(\exists!\) berarti “ada tepat satu”. Jadi, untuk setiap input, hanya boleh ada satu hasil. Ini ide utama yang harus dipegang sebelum belajar homomorfisma, isomorfisma, dan peta hasil bagi.</p><section class="intro-note-section"><h4>Kenapa topik ini muncul?</h4><p>Konsep fungsi penting karena banyak keputusan membutuhkan aturan yang tidak ambigu. Sebuah input boleh diproses dengan rumus, tabel, panah, atau program komputer, tetapi syarat dasarnya sama: input itu harus memiliki satu output yang jelas.</p><p>Definisi fungsi memberi bahasa untuk membedakan aturan yang bisa dipakai dari aturan yang membingungkan. Setelah itu, istilah domain, kodomain, image, injektif, dan surjektif membantu memeriksa kualitas aturan tersebut dengan lebih teliti.</p></section><div class="example-box"><h3>Contoh pelan</h3>
+<p>Misalkan \(A=\{1,2,3\}\) dan \(B=\{a,b\}\). Jika \(f(1)=a\), \(f(2)=a\), dan \(f(3)=b\), maka ini fungsi. Input 1, 2, dan 3 masing-masing punya satu output. Fungsi ini tidak injektif karena 1 dan 2 punya output yang sama. Fungsi ini surjektif karena semua anggota \(B\), yaitu \(a\) dan \(b\), muncul sebagai output.</p>
+<p>Komposisi fungsi berarti hasil fungsi pertama dipakai sebagai input fungsi kedua.</p>
+<div class="formula">\[
+(g\circ f)(x)=g(f(x))
+\]</div>
+<p>Jika \(f(x)=2x+1\) dan \(g(x)=x^2\), maka \((g\circ f)(x)=g(2x+1)=(2x+1)^2\).</p>
+</div>
+<div class="illustration-box">
+<h4>Visual bantu: fungsi sebagai panah input-output</h4>
+<svg aria-label="Diagram fungsi sebagai panah dari input ke output" class="concept-svg" role="img" viewbox="0 0 720 250">
+<defs><marker id="arr1" markerheight="7" markerwidth="7" orient="auto" refx="9" refy="5" viewbox="0 0 10 10"><path d="M0 0 L10 5 L0 10 Z" fill="#2563eb"></path></marker></defs>
+<rect fill="#eff6ff" height="190" rx="18" stroke="#93c5fd" width="250" x="32" y="28"></rect>
+<rect fill="#ecfdf5" height="190" rx="18" stroke="#86efac" width="250" x="438" y="28"></rect>
+<text fill="#172033" font-size="18" font-weight="700" x="112" y="55">Input / Domain</text>
+<text fill="#172033" font-size="18" font-weight="700" x="515" y="55">Output / Kodomain</text>
+<circle cx="125" cy="96" fill="#dbeafe" r="18" stroke="#2563eb"></circle><text fill="#172033" font-size="17" x="120" y="102">1</text>
+<circle cx="125" cy="145" fill="#dbeafe" r="18" stroke="#2563eb"></circle><text fill="#172033" font-size="17" x="120" y="151">2</text>
+<circle cx="125" cy="194" fill="#dbeafe" r="18" stroke="#2563eb"></circle><text fill="#172033" font-size="17" x="120" y="200">3</text>
+<circle cx="575" cy="112" fill="#dcfce7" r="20" stroke="#16a34a"></circle><text fill="#172033" font-size="17" x="570" y="118">a</text>
+<circle cx="575" cy="178" fill="#dcfce7" r="20" stroke="#16a34a"></circle><text fill="#172033" font-size="17" x="570" y="184">b</text>
+<line marker-end="url(#arr1)" stroke="#2563eb" stroke-width="3" x1="145" x2="548" y1="96" y2="112"></line>
+<line marker-end="url(#arr1)" stroke="#2563eb" stroke-width="3" x1="145" x2="548" y1="145" y2="112"></line>
+<line marker-end="url(#arr1)" stroke="#2563eb" stroke-width="3" x1="145" x2="548" y1="194" y2="178"></line>
+<text fill="#64748b" font-size="15" x="260" y="235">1 dan 2 boleh menuju output yang sama; tetap fungsi, tetapi tidak injektif.</text>
+</svg>
+<p class="svg-caption">Cara membacanya: kiri adalah input, kanan adalah output. Satu input tidak boleh bercabang ke dua output.</p>
+</div>
+<div class="application-box"><h3>Aplikasi nyata dan koneksinya</h3><p>Dalam sistem data, fungsi membantu memastikan bahwa satu nilai awal mengarah ke satu hasil yang dapat dipercaya. Yang penting bukan bentuk rumusnya, tetapi kejelasan relasinya. Jika sebuah input bisa menghasilkan dua keputusan berbeda, sistem tidak lagi punya aturan yang stabil. Jika sebuah target tidak pernah tercapai, berarti ada bagian dari kodomain yang hanya tertulis sebagai kemungkinan tetapi tidak muncul dalam hasil nyata.</p><p>Dari sini, injektif dan surjektif menjadi alat membaca peta input-output. Injektif menanyakan apakah output cukup membedakan input, sedangkan surjektif menanyakan apakah semua target yang dijanjikan benar-benar dapat dicapai. Jadi fungsi bukan sekadar memasukkan x ke rumus, melainkan cara memeriksa apakah sebuah alur informasi jelas, lengkap, dan tidak ambigu.</p></div>
+<div class="summary-box">
+<h3>Ringkasan agar tidak tersesat</h3>
+<div class="summary-grid"><div><strong>Inti:</strong><br/>Fungsi membuat keputusan input-output tidak ambigu.</div><div><strong>Aturan penting:</strong><br/>Satu input wajib punya tepat satu output.</div><div><strong>Yang dicek:</strong><br/>Injektif mengecek tabrakan output; surjektif mengecek target yang tercapai.</div></div>
+<div class="mistake-inside-box">
+<h4>Kesalahan umum</h4>
+<ul><li>Mengira fungsi harus satu-ke-satu. Dua input boleh punya output yang sama.</li><li>Mengira surjektif berarti semua input terpakai. Yang harus terpakai adalah semua anggota kodomain.</li><li>Mencampur kodomain dan image. Image adalah output yang benar-benar muncul.</li></ul>
+</div>
+<div class="mini-visual-box">
+<h4>Bagian rawan bingung: fungsi vs injektif</h4>
+<svg aria-label="Fungsi tidak harus injektif, tetapi satu input tidak boleh bercabang" class="mini-svg" role="img" viewbox="0 0 520 160">
+<defs><marker id="m1" markerheight="6" markerwidth="6" orient="auto" refx="9" refy="5" viewbox="0 0 10 10"><path d="M0 0 L10 5 L0 10 Z" fill="#2563eb"></path></marker></defs>
+<text fill="#172033" font-size="15" font-weight="700" x="92" y="28">Masih fungsi</text>
+<circle cx="60" cy="62" fill="#dbeafe" r="13" stroke="#2563eb"></circle><text font-size="13" x="56" y="67">1</text>
+<circle cx="60" cy="110" fill="#dbeafe" r="13" stroke="#2563eb"></circle><text font-size="13" x="56" y="115">2</text>
+<circle cx="190" cy="86" fill="#dcfce7" r="15" stroke="#16a34a"></circle><text font-size="13" x="186" y="91">a</text>
+<line marker-end="url(#m1)" stroke="#2563eb" stroke-width="2.5" x1="74" x2="174" y1="62" y2="86"></line>
+<line marker-end="url(#m1)" stroke="#2563eb" stroke-width="2.5" x1="74" x2="174" y1="110" y2="86"></line>
+<text fill="#172033" font-size="15" font-weight="700" x="380" y="28">Bukan fungsi</text>
+<circle cx="340" cy="86" fill="#fee2e2" r="13" stroke="#ef4444"></circle><text font-size="13" x="336" y="91">1</text>
+<circle cx="465" cy="62" fill="#dcfce7" r="15" stroke="#16a34a"></circle><text font-size="13" x="461" y="67">a</text>
+<circle cx="465" cy="110" fill="#dcfce7" r="15" stroke="#16a34a"></circle><text font-size="13" x="461" y="115">b</text>
+<line marker-end="url(#m1)" stroke="#ef4444" stroke-width="2.5" x1="354" x2="449" y1="86" y2="62"></line>
+<line marker-end="url(#m1)" stroke="#ef4444" stroke-width="2.5" x1="354" x2="449" y1="86" y2="110"></line>
+</svg>
+<p>Dua input boleh menuju output yang sama. Itu masih fungsi. Yang tidak boleh adalah satu input bercabang ke dua output.</p>
+</div>
+</div>
+<div class="complete-box">
+<h3>Inti konsep yang harus dibawa pulang</h3>
+<p>Fungsi adalah aturan yang membuat hubungan input-output bisa dipercaya. Satu input harus punya tepat satu output, tetapi beberapa input boleh berbagi output yang sama. Injektif dan surjektif menambahkan dua cara membaca kualitas aturan: apakah output bertabrakan, dan apakah semua target dalam kodomain benar-benar tercapai. Dengan cara ini, fungsi menjadi bahasa dasar untuk membahas pemetaan data, keputusan, dan struktur yang lebih besar.</p>
+</div>
+<div class="source-box">
+<h3>Pelajari lebih lanjut</h3>
+<ul class="source-list"><li><a href="https://repository.uinsu.ac.id/17153/1/e-modul%20Struktur%20Aljabar%20Grup_compressed.pdf" rel="noopener" target="_blank">Materi terkait Bahasa Indonesia: fungsi, relasi, dan operasi biner</a></li>
+<li><a href="https://tahtamedia.co.id/index.php/issj/article/download/1162/1160/4274" rel="noopener" target="_blank">Buku Indonesia: Struktur Aljabar, himpunan, relasi, fungsi, dan operasi biner</a></li>
+<li><a href="https://mathigon.org/course/functions" rel="noopener" target="_blank">Mathigon, functions course</a></li>
+<li><a href="https://ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-spring-2015/" rel="noopener" target="_blank">MIT OCW, Mathematics for Computer Science</a></li></ul>
+</div>
+</div></details>
+<details class="toggle">
+<summary>Lab 1 dan kuis</summary>
+<div class="toggle-body"><div class="lab" id="sets1">
+<div class="lab-title"><h3><span class="pill blue lab-name-pill">Lab 1A. Pemeriksa Data Siswa</span></h3></div><div class="lab-sense-box"><h4>Cara membaca lab dan widget ini</h4><p>Gunakan widget dan visual untuk memeriksa aturan input-output secara perlahan. Pertama pastikan setiap input punya tepat satu output. Setelah itu baru periksa apakah ada output yang dipakai bersama dan apakah ada target yang tidak pernah tercapai.</p></div>
+<p class="lab-objective"><strong>Tujuan lab:</strong> Bedakan fungsi, injektif, surjektif, dan bijektif dari data siswa yang nyata.</p>
+<p class="predict-box"><strong>Sebelum klik tombol:</strong> tebak dulu hasilnya, lalu bandingkan dengan visualisasi.</p>
+<h4>Cerita penerapan</h4><p>Sistem administrasi menggabungkan data siswa dari nilai ujian, status beasiswa, dan pilihan program. Jika satu ID siswa mengarah ke dua program berbeda, laporan menjadi tidak valid. Jika semua program muncul sebagai pilihan, pemetaan bersifat surjektif. Jika tidak ada dua siswa yang berbagi output yang sama, pemetaan bersifat injektif. Fokus lab ini: baca panahnya, bukan menghafal istilahnya.</p>
+<h4>Teori dasar</h4><p>Fungsi dari A ke B memberi setiap anggota A tepat satu output di B. Injektif berarti tidak ada output ganda. Surjektif berarti semua anggota kodomain terkena.</p>
+<div class="formula">\(f:A\to B,\quad \forall a\in A,\ \exists !\,b\in B:\ f(a)=b\)</div>
+<div class="two"><div><label>Domain A</label><input id="sets1_A" value="A001,A002,A003,A004"/><label>Kodomain B</label><input id="sets1_B" value="Math,CS,Physics"/><label>Pasangan</label><textarea id="sets1_pairs">A001:Math,A002:CS,A003:Physics,A004:CS</textarea><button onclick="sets1()">Analisis pemetaan</button><button class="secondary" onclick="sets1Bad()">Muat data rusak</button></div><div><div class="svgbox" id="sets1_svg"></div><div class="result" id="sets1_out"></div></div></div>
+<div class="quiz"><h4>Cek pemahaman</h4>
+<div class="quiz-item">
+<p><strong>P1.</strong> Untuk A={1,2,3}, B={a,b}, dan f={1→a,2→a,3→b}, klasifikasikan f: injektif, surjektif, bijektif, atau bukan ketiganya.</p>
+<textarea id="sets1_q1" placeholder="Tulis jawaban dan alasanmu"></textarea>
+<button onclick="checkQuiz('sets1',1)">Cek</button>
+<div class="feedback hint" id="sets1_f1"></div>
+</div>
+<div class="quiz-item">
+<p><strong>P2.</strong> Apa yang membuat sebuah relasi gagal menjadi fungsi?</p>
+<textarea id="sets1_q2" placeholder="Tulis jawaban dan alasanmu"></textarea>
+<button onclick="checkQuiz('sets1',2)">Cek</button>
+<div class="feedback hint" id="sets1_f2"></div>
+</div>
+</div>
+</div></div>
+</details>
+<details class="toggle">
+<summary>Lab 2 dan kuis</summary>
+<div class="toggle-body"><div class="lab" id="sets2">
+<div class="lab-title"><h3><span class="pill blue lab-name-pill">Lab 1B. Alur Izin Login</span></h3></div><div class="lab-sense-box"><h4>Cara membaca lab dan widget ini</h4><p>Gunakan widget sebagai rantai pemetaan. Tujuannya adalah melihat bahwa komposisi fungsi hanya masuk akal jika setiap tahap sebelumnya menghasilkan output yang dapat dipakai oleh tahap berikutnya.</p></div>
+<p class="lab-objective"><strong>Tujuan lab:</strong> Lihat komposisi fungsi sebagai alur user → peran → akses.</p>
+<p class="predict-box"><strong>Sebelum klik tombol:</strong> tebak dulu hasilnya, lalu bandingkan dengan visualisasi.</p>
+<h4>Cerita penerapan</h4><p>Sistem login memetakan user ID ke peran, lalu peran ke akses dashboard. Komposisi menentukan apa yang bisa dilihat pengguna. Jika nilai tengah hilang, keputusan akses menjadi tidak terdefinisi.</p>
+<h4>Teori dasar</h4><p>Jika f memetakan pengguna ke peran dan g memetakan peran ke level akses, maka komposisi g dengan f memetakan pengguna langsung ke level akses.</p>
+<div class="formula">\((g\circ f)(x)=g(f(x))\)</div>
+<div class="two"><div><label>f: user ke peran</label><textarea id="sets2_f">Audrey:admin,Bella:student,Cindy:student</textarea><label>g: peran ke akses</label><textarea id="sets2_g">admin:all,student:course</textarea><button onclick="sets2()">Susun peta akses</button></div><div><div class="svgbox" id="sets2_svg"></div><div class="result" id="sets2_out"></div></div></div>
+<div class="quiz"><h4>Cek pemahaman</h4>
+<div class="quiz-item">
+<p><strong>P1.</strong> Jika f(x)=2x+1 dan g(x)=x², hitung (g∘f)(x).</p>
+<input id="sets2_q1" placeholder="Tulis jawabanmu"/>
+<button onclick="checkQuiz('sets2',1)">Cek</button>
+<div class="feedback hint" id="sets2_f1"></div>
+</div>
+<div class="quiz-item">
+<p><strong>P2.</strong> Mengapa role yang hilang membuat komposisi fungsi gagal?</p>
+<textarea id="sets2_q2" placeholder="Tulis jawaban dan alasanmu"></textarea>
+<button onclick="checkQuiz('sets2',2)">Cek</button>
+<div class="feedback hint" id="sets2_f2"></div>
+</div>
+</div>
+</div></div>
+</details>
+<div class="bottom-home-link"><a href="index.html">← Kembali ke Beranda</a></div>
+</main>
+<footer>Rumus dirender memakai MathJax v3 dengan output SVG. Buka dengan akses internet agar rumus tampil rapi.</footer>
+<script src="app.js"></script>
+</body>
+</html>

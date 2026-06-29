@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+
+<html lang="id">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>10. Faktorisasi Polinomial | Lab MA3021</title>
+<link href="styles.css" rel="stylesheet"/>
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']], processEscapes: true },
+  svg: { fontCache: 'global' },
+  startup: { typeset: true }
+};
+</script>
+<script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+<body>
+<header><div class="header-inner">
+<h1>10. Faktorisasi Polinomial</h1>
+<p>Dari akar sampai irreducible di field berhingga</p>
+</div></header>
+<main>
+<details class="toggle">
+<summary>Materi Pengantar</summary>
+<div class="toggle-body"><p>Faktorisasi polinomial berarti memecah polinomial menjadi perkalian polinomial yang lebih sederhana. Tetapi hasil faktorisasi bergantung pada field yang dipakai.</p><p>Polinomial yang tidak bisa difaktorkan lagi disebut irreducible. Di field berhingga, langkah pertama yang mudah adalah mencari akar.</p><div class="formula">\[
+f(a)=0\iff (x-a)\mid f(x)
+\]</div><p>Rumus ini berarti: jika \(a\) membuat \(f(a)=0\), maka \(x-a\) adalah faktor dari \(f(x)\).</p><div class="formula">\[
+\text{Polinomial kuadrat irreducible jika tidak punya akar di field tersebut.}
+\]</div><p>Contoh: di \(\mathbb Z_5\), \(x^2+1\) punya akar 2 dan 3, karena \(2^2+1=5\equiv0\) dan \(3^2+1=10\equiv0\). Jadi \(x^2+1=(x-2)(x-3)\).</p><section class="intro-note-section"><h4>Kenapa topik ini muncul?</h4><p>Faktorisasi polinomial penting karena ia menunjukkan apakah sebuah polinomial dapat dibangun dari bagian yang lebih sederhana. Namun dalam aljabar, kesederhanaan itu selalu bergantung pada field tempat kita bekerja.</p><p>Akar, faktor linear, dan irreducible bukan sifat yang berdiri sendiri tanpa konteks. Polinomial yang sama dapat terpecah di satu field, tetapi tetap tidak terpecah di field lain.</p></section><div class="example-box"><h3>Contoh akar</h3><p>Di \(\mathbb Z_5\), polinomial \(x^2+1\) punya akar 2 dan 3, karena \(2^2+1\equiv0\) dan \(3^2+1\equiv0\). Jadi polinomial ini bisa difaktorkan di \(\mathbb Z_5\).</p></div>
+<div class="illustration-box">
+<h4>Visual bantu: faktor bergantung pada field</h4>
+<svg aria-label="Diagram akar polinomial berbeda di field berbeda" class="concept-svg" role="img" viewbox="0 0 720 250">
+<rect fill="#ecfdf5" height="140" rx="16" stroke="#86efac" width="260" x="70" y="55"></rect>
+<rect fill="#eff6ff" height="140" rx="16" stroke="#93c5fd" width="260" x="390" y="55"></rect>
+<text fill="#172033" font-size="18" font-weight="700" text-anchor="middle" x="200" y="88">Di Z₅</text>
+<text fill="#172033" font-size="18" font-weight="700" text-anchor="middle" x="520" y="88">Di Z₃</text>
+<text fill="#047857" font-size="21" text-anchor="middle" x="200" y="125">x² + 1 punya akar</text>
+<text fill="#64748b" font-size="15" text-anchor="middle" x="200" y="156">x = 2 atau 3</text>
+<text fill="#2563eb" font-size="21" text-anchor="middle" x="520" y="125">tidak ada akar</text>
+<text fill="#64748b" font-size="15" text-anchor="middle" x="520" y="156">uji x = 0,1,2</text>
+<text fill="#64748b" font-size="16" text-anchor="middle" x="360" y="222">Sebelum faktorisasi, selalu sebutkan field tempat berhitung.</text>
+</svg>
+<p class="svg-caption">Polinomial yang sama bisa punya akar di satu Zₚ, tetapi tidak di Zₚ lain.</p>
+</div>
+<div class="application-box"><h3>Aplikasi nyata dan koneksinya</h3><p>Ketika kita memfaktorkan polinomial, kita sedang mencari struktur internalnya. Jika polinomial punya akar di field tertentu, maka ia memiliki faktor linear di field itu. Jika tidak punya faktor nontrivial, polinomial disebut irreducible atas field tersebut. Kata atas field tersebut sangat penting karena tempat berhitung menentukan faktor apa yang tersedia.</p><p>Polinomial irreducible berguna karena dapat menjadi fondasi untuk membangun struktur aljabar baru, termasuk field berhingga. Jika polinomial yang dipilih ternyata bisa dipecah, maka struktur yang dibangun kehilangan sifat yang diinginkan. Jadi faktorisasi bukan sekadar memecah ekspresi, tetapi memeriksa apakah sebuah polinomial cukup kuat untuk menjadi dasar sistem hitung baru.</p></div>
+<div class="summary-box">
+<h3>Ringkasan agar tidak tersesat</h3>
+<div class="summary-grid"><div><strong>Inti:</strong><br/>Faktorisasi memecah polinomial menjadi faktor lebih sederhana.</div><div><strong>Aturan penting:</strong><br/>Akar dan faktor bergantung pada field.</div><div><strong>Yang dicek:</strong><br/>Irreducible penting untuk membangun field berhingga.</div></div>
+<div class="mistake-inside-box">
+<h4>Kesalahan umum</h4>
+<ul><li>Mengira faktorisasi selalu sama di semua field. Field berbeda bisa memberi faktor berbeda.</li><li>Mengira tidak menemukan akar selalu berarti irreducible. Untuk derajat tinggi perlu pemeriksaan tambahan.</li><li>Lupa menyebut field sebelum memfaktorkan polinomial.</li></ul>
+</div>
+<p class="summary-note">Cara cepat mengingat: pertanyaan 'bisa difaktorkan?' belum lengkap sampai kita menyebut field tempat koefisien dan akar dicari.</p><div class="mini-visual-box">
+<h4>Bagian rawan bingung: akar tergantung field</h4>
+<svg aria-label="Akar polinomial tergantung field" class="mini-svg" role="img" viewbox="0 0 520 170">
+<rect fill="#ecfdf5" height="95" rx="14" stroke="#86efac" width="190" x="45" y="42"></rect>
+<text font-size="16" font-weight="700" text-anchor="middle" x="140" y="70">Z₅</text>
+<text fill="#047857" font-size="20" text-anchor="middle" x="140" y="101">x²+1 = 0</text>
+<text fill="#64748b" font-size="12" text-anchor="middle" x="140" y="123">x=2 atau 3</text>
+<rect fill="#eff6ff" height="95" rx="14" stroke="#93c5fd" width="190" x="285" y="42"></rect>
+<text font-size="16" font-weight="700" text-anchor="middle" x="380" y="70">Z₃</text>
+<text fill="#2563eb" font-size="20" text-anchor="middle" x="380" y="101">tidak ada akar</text>
+<text fill="#64748b" font-size="12" text-anchor="middle" x="380" y="123">uji 0,1,2</text>
+</svg>
+<p>Akar dicari di tempat berhitung yang dipilih. Karena itu hasil faktorisasi bisa berubah ketika field berubah.</p>
+</div>
+</div>
+<div class="complete-box">
+<h3>Inti konsep yang harus dibawa pulang</h3>
+<p>Faktorisasi polinomial selalu bergantung pada field. Untuk memahami apakah sebuah polinomial dapat dipecah, kita harus tahu koefisien dan akar dicari di mana. Irreducible berarti tidak dapat difaktorkan secara nontrivial dalam field tersebut. Konsep ini penting karena polinomial irreducible dapat dipakai untuk membangun struktur aljabar baru yang operasinya tetap rapi.</p>
+</div>
+<div class="source-box">
+<h3>Pelajari lebih lanjut</h3>
+<ul class="source-list"><li><a href="https://tahtamedia.co.id/index.php/issj/article/download/1162/1160/4274" rel="noopener" target="_blank">Materi terkait Bahasa Indonesia: faktorisasi polinom</a></li>
+<li><a href="https://modul.pkbm.id/paket-c/Modul%205%20Matematika%20Peminatan%20Paket%20C%20Penerapan%20Polinomial%20dalam%20Pengembangan%20Ilmu%20dan%20Teknologi%20Sehari-hari.pdf" rel="noopener" target="_blank">Modul Indonesia: faktorisasi dan penerapan polinomial</a></li>
+<li><a href="https://repo.uinsatu.ac.id/33242/1/STRUKTUR%20ALJABAR%20%28Bapak%20muniri%29.pdf" rel="noopener" target="_blank">Buku Indonesia: faktorisasi dalam struktur aljabar</a></li>
+<li><a href="https://doc.sagemath.org/html/en/reference/polynomial_rings/index.html" rel="noopener" target="_blank">SageMath polynomial rings documentation</a></li>
+<li><a href="https://ntrs.nasa.gov/citations/19770026931" rel="noopener" target="_blank">NASA NTRS, finite fields and Reed-Solomon coding</a></li></ul>
+</div>
+</div></details>
+<details class="toggle">
+<summary>Lab 1 dan kuis</summary>
+<div class="toggle-body"><div class="lab" id="fac1">
+<div class="lab-title"><h3><span class="pill blue lab-name-pill">Lab 10A. Pemilih Polinomial Irreducible</span></h3></div><div class="lab-sense-box"><h4>Cara membaca lab dan widget ini</h4><p>Gunakan widget untuk membandingkan hasil di beberapa field. Jangan hanya melihat apakah ada akar; perhatikan bahwa daftar kandidat akar berubah ketika field berubah.</p></div>
+<p class="lab-objective"><strong>Tujuan lab:</strong> Gunakan akar untuk mendeteksi faktor linear sederhana.</p>
+<p class="predict-box"><strong>Sebelum klik tombol:</strong> tebak dulu hasilnya, lalu bandingkan dengan visualisasi.</p>
+<h4>Cerita penerapan</h4><p>Untuk membangun GF(2^m), polinomial direduksi dengan polinomial irreducible. Jika polinomial itu bisa difaktorkan, konstruksi field gagal.</p>
+<h4>Teori dasar</h4><p>Untuk polinomial kuadrat dan kubik di atas field, tidak punya akar sudah cukup untuk membuktikan irreducible.</p>
+<div class="formula">\(f(a)=0\iff (x-a)\mid f(x)\)</div>
+<div class="two"><div><label>Prima p</label><input id="fac1_p" type="number" value="5"/><label>Koefisien polinomial</label><input id="fac1_coeff" value="1,0,1"/><button onclick="fac1()">Cari akar</button></div><div><div class="svgbox" id="fac1_svg"></div><div class="result" id="fac1_out"></div></div></div>
+<div class="quiz"><h4>Cek pemahaman</h4>
+<div class="quiz-item">
+<p><strong>P1.</strong> Di Z5, faktorkan x²+1 menjadi faktor linear.</p>
+<input id="fac1_q1" placeholder="Tulis jawabanmu"/>
+<button onclick="checkQuiz('fac1',1)">Cek</button>
+<div class="feedback hint" id="fac1_f1"></div>
+</div>
+<div class="quiz-item">
+<p><strong>P2.</strong> Di Z3, apakah x²+1 irreducible? Jelaskan dengan mengecek akar.</p>
+<textarea id="fac1_q2" placeholder="Tulis jawaban dan alasanmu"></textarea>
+<button onclick="checkQuiz('fac1',2)">Cek</button>
+<div class="feedback hint" id="fac1_f2"></div>
+</div>
+</div>
+</div></div>
+</details>
+<details class="toggle">
+<summary>Lab 2 dan kuis</summary>
+<div class="toggle-body"><div class="lab" id="fac2">
+<div class="lab-title"><h3><span class="pill blue lab-name-pill">Lab 10B. Demo Perubahan Field</span></h3></div><div class="lab-sense-box"><h4>Cara membaca lab dan widget ini</h4><p>Gunakan widget untuk memahami irreducible sebagai syarat struktur. Jika polinomial dapat dipecah, ia tidak cocok menjadi dasar konstruksi yang membutuhkan operasi invers yang rapi.</p></div>
+<p class="lab-objective"><strong>Tujuan lab:</strong> Bandingkan bagaimana faktorisasi berubah ketika field berubah.</p>
+<p class="predict-box"><strong>Sebelum klik tombol:</strong> tebak dulu hasilnya, lalu bandingkan dengan visualisasi.</p>
+<h4>Cerita penerapan</h4><p>Sistem aljabar komputer harus tahu field koefisiennya. Polinomial yang sama bisa reducible di satu field dan irreducible di field lain.</p>
+<h4>Teori dasar</h4><p>Mengubah field berarti mengubah akar dan faktor yang diperbolehkan.</p>
+<div class="formula">\(\text{faktorisasi }f(x)\text{ bergantung pada field koefisien}\)</div>
+<div class="two"><div><label>Polinomial</label><select id="fac2_poly"><option value="x2p1">x²+1</option><option value="x3p1">x³+1</option></select><button onclick="fac2()">Bandingkan field</button></div><div><div class="svgbox" id="fac2_svg"></div><div class="result" id="fac2_out"></div></div></div>
+<div class="quiz"><h4>Cek pemahaman</h4>
+<div class="quiz-item">
+<p><strong>P1.</strong> Mengapa kita harus menyebutkan field sebelum memfaktorkan polinomial?</p>
+<textarea id="fac2_q1" placeholder="Tulis jawaban dan alasanmu"></textarea>
+<button onclick="checkQuiz('fac2',1)">Cek</button>
+<div class="feedback hint" id="fac2_f1"></div>
+</div>
+<div class="quiz-item">
+<p><strong>P2.</strong> Berikan satu akar dari x²+1 di Z5.</p>
+<input id="fac2_q2" placeholder="Tulis jawabanmu"/>
+<button onclick="checkQuiz('fac2',2)">Cek</button>
+<div class="feedback hint" id="fac2_f2"></div>
+</div>
+</div>
+</div></div>
+</details>
+<div class="bottom-home-link"><a href="index.html">← Kembali ke Beranda</a></div>
+</main>
+<footer>Rumus dirender memakai MathJax v3 dengan output SVG. Buka dengan akses internet agar rumus tampil rapi.</footer>
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+
+<html lang="id">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>3. Grup Hingga | Lab MA3021</title>
+<link href="styles.css" rel="stylesheet"/>
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']], processEscapes: true },
+  svg: { fontCache: 'global' },
+  startup: { typeset: true }
+};
+</script>
+<script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+<body>
+<header><div class="header-inner">
+<h1>3. Grup Hingga</h1>
+<p>Dari putaran robot sampai tabel simetri</p>
+</div></header>
+<main>
+<details class="toggle">
+<summary>Materi Pengantar</summary>
+<div class="toggle-body"><p>Grup adalah cara formal untuk membahas aksi yang bisa digabung dan bisa dibatalkan. Contoh sederhana adalah putaran persegi. Jika persegi diputar 90 derajat, lalu diputar 90 derajat lagi, hasilnya sama dengan putaran 180 derajat.</p><p>Grup hingga berarti jumlah elemennya terbatas. Untuk rotasi persegi, elemennya bisa ditulis sebagai \(0^\circ,90^\circ,180^\circ,270^\circ\). Setelah melewati 360 derajat, posisi kembali ke awal.</p><div class="formula">\[
+R_4=\{0,90,180,270\},\quad a*b=(a+b)\bmod360
+\]</div><p>Ada empat syarat grup: closure, asosiatif, identitas, dan invers. Closure berarti hasil operasi tetap berada di dalam himpunan. Identitas berarti ada elemen yang tidak mengubah apa pun. Invers berarti setiap aksi bisa dibatalkan.</p><div class="formula">\[
+\operatorname{ord}(a)=\min\{k&gt;0:a^k=e\}
+\]</div><p>Orde elemen adalah berapa kali elemen itu diulang sampai kembali ke identitas. Rotasi 90 derajat punya orde 4 karena empat kali rotasi 90 derajat kembali ke posisi awal.</p><section class="intro-note-section"><h4>Kenapa topik ini muncul?</h4><p>Grup muncul ketika kita ingin mempelajari aksi secara teratur. Daripada melihat setiap aksi sebagai kejadian terpisah, grup bertanya apakah aksi-aksi itu membentuk dunia kecil yang tertutup dan konsisten.</p><p>Empat syarat grup bukan daftar hafalan. Penutupan memastikan kita tidak keluar dari dunia aksi yang sedang dibahas. Identitas memberi keadaan netral. Invers memberi cara kembali. Asosiativitas memastikan pengelompokan aksi tidak mengubah hasil akhir.</p></section><div class="example-box"><h3>Contoh konkret</h3><p>Bayangkan stiker persegi. Putar 90°, lalu 90° lagi, hasilnya sama dengan putar 180°. Putar 90° lalu 270° kembali ke posisi awal. Ini menunjukkan operasi, identitas, dan invers.</p></div>
+<div class="illustration-box">
+<h4>Visual bantu: grup sebagai aksi yang bisa dibatalkan</h4>
+<svg aria-label="Diagram rotasi persegi sebagai grup" class="concept-svg" role="img" viewbox="0 0 720 250">
+<defs><marker id="arr3" markerheight="7" markerwidth="7" orient="auto" refx="9" refy="5" viewbox="0 0 10 10"><path d="M0 0 L10 5 L0 10 Z" fill="#2563eb"></path></marker></defs>
+<rect fill="#dbeafe" height="90" rx="10" stroke="#2563eb" width="90" x="100" y="70"></rect>
+<text fill="#172033" font-size="22" text-anchor="middle" x="145" y="122">0°</text>
+<line marker-end="url(#arr3)" stroke="#2563eb" stroke-width="4" x1="210" x2="315" y1="115" y2="115"></line>
+<text fill="#64748b" font-size="15" text-anchor="middle" x="262" y="95">putar 90°</text>
+<rect fill="#ecfdf5" height="90" rx="10" stroke="#16a34a" transform="rotate(8 380 115)" width="90" x="335" y="70"></rect>
+<text fill="#172033" font-size="22" text-anchor="middle" x="380" y="122">90°</text>
+<line marker-end="url(#arr3)" stroke="#2563eb" stroke-width="4" x1="445" x2="550" y1="115" y2="115"></line>
+<text fill="#64748b" font-size="15" text-anchor="middle" x="497" y="95">putar 270°</text>
+<rect fill="#dbeafe" height="90" rx="10" stroke="#2563eb" width="90" x="570" y="70"></rect>
+<text fill="#172033" font-size="22" text-anchor="middle" x="615" y="122">0°</text>
+<text fill="#172033" font-size="16" text-anchor="middle" x="360" y="215">Aksi + aksi = aksi baru. Aksi lawan membatalkan aksi pertama.</text>
+</svg>
+<p class="svg-caption">Rotasi 90° lalu 270° kembali ke posisi awal. Itu contoh invers.</p>
+</div>
+<div class="application-box"><h3>Aplikasi nyata dan koneksinya</h3><p>Grup hingga membantu memahami sistem yang memiliki jumlah keadaan atau aksi terbatas. Yang dipelajari bukan ukuran bendanya, melainkan pola perubahan yang bisa terjadi. Ketika dua aksi digabung, hasilnya harus masih termasuk aksi yang dikenal. Jika tidak, kita tidak punya sistem yang tertutup.</p><p>Melihat grup sebagai aksi membuat definisinya lebih masuk akal. Identitas adalah aksi yang tidak mengubah apa pun. Invers adalah aksi pembatal. Operasi adalah aturan penggabungan aksi. Tabel Cayley kemudian menjadi catatan lengkap tentang bagaimana setiap pasangan aksi menghasilkan aksi lain dalam sistem yang sama.</p></div>
+<div class="summary-box">
+<h3>Ringkasan agar tidak tersesat</h3>
+<div class="summary-grid"><div><strong>Inti:</strong><br/>Grup adalah struktur untuk aksi yang bisa digabung.</div><div><strong>Aturan penting:</strong><br/>Harus ada identitas, invers, penutupan, dan asosiativitas.</div><div><strong>Yang dicek:</strong><br/>Grup hingga berarti jumlah elemen atau aksinya terbatas.</div></div>
+<div class="mistake-inside-box">
+<h4>Kesalahan umum</h4>
+<ul><li>Mengira grup harus berupa angka. Grup bisa berupa rotasi, simetri, atau permutasi.</li><li>Mengira tabel Cayley yang penuh otomatis grup. Asosiativitas tetap harus benar.</li><li>Lupa bahwa identitas adalah aksi yang tidak mengubah apa pun.</li></ul>
+</div>
+<div class="mini-visual-box">
+<h4>Bagian rawan bingung: invers aksi</h4>
+<svg aria-label="Invers aksi rotasi" class="mini-svg" role="img" viewbox="0 0 520 160">
+<defs><marker id="m3" markerheight="6" markerwidth="6" orient="auto" refx="9" refy="5" viewbox="0 0 10 10"><path d="M0 0 L10 5 L0 10 Z" fill="#2563eb"></path></marker></defs>
+<rect fill="#dbeafe" height="58" rx="8" stroke="#2563eb" width="58" x="65" y="55"></rect><text font-size="17" text-anchor="middle" x="94" y="90">0°</text>
+<line marker-end="url(#m3)" stroke="#2563eb" stroke-width="3" x1="135" x2="220" y1="84" y2="84"></line>
+<text font-size="13" text-anchor="middle" x="177" y="68">+90°</text>
+<rect fill="#ecfdf5" height="58" rx="8" stroke="#16a34a" transform="rotate(10 264 84)" width="58" x="235" y="55"></rect><text font-size="17" text-anchor="middle" x="264" y="90">90°</text>
+<line marker-end="url(#m3)" stroke="#2563eb" stroke-width="3" x1="305" x2="390" y1="84" y2="84"></line>
+<text font-size="13" text-anchor="middle" x="347" y="68">+270°</text>
+<rect fill="#dbeafe" height="58" rx="8" stroke="#2563eb" width="58" x="405" y="55"></rect><text font-size="17" text-anchor="middle" x="434" y="90">0°</text>
+</svg>
+<p>Invers bukan selalu 1/a. Untuk aksi, invers adalah aksi yang membatalkan dan membawa keadaan kembali ke awal.</p>
+</div>
+</div>
+<div class="complete-box">
+<h3>Inti konsep yang harus dibawa pulang</h3>
+<p>Grup adalah struktur untuk aksi yang bisa digabung secara konsisten. Elemen grup tidak harus angka; elemen bisa berupa rotasi, permutasi, atau transformasi. Yang penting adalah aturan gabungannya tertutup, punya identitas, punya invers, dan asosiatif. Dengan memahami grup, kita belajar melihat pola tindakan, bukan hanya pola bilangan.</p>
+</div>
+<div class="source-box">
+<h3>Pelajari lebih lanjut</h3>
+<ul class="source-list"><li><a href="https://dosen.ikipsiliwangi.ac.id/wp-content/uploads/sites/6/2018/03/Pengantar-Grup-2016.pdf" rel="noopener" target="_blank">Materi terkait Bahasa Indonesia: pengantar grup</a></li>
+<li><a href="https://repository.uinsu.ac.id/17153/1/e-modul%20Struktur%20Aljabar%20Grup_compressed.pdf" rel="noopener" target="_blank">E-modul Indonesia: grup, operasi biner, subgrup</a></li>
+<li><a href="https://tahtamedia.co.id/index.php/issj/article/download/1162/1160/4274" rel="noopener" target="_blank">Buku Indonesia: Struktur Aljabar bagian grup</a></li>
+<li><a href="https://nathancarter.github.io/group-explorer/index.html" rel="noopener" target="_blank">Group Explorer, interactive finite group exploration</a></li>
+<li><a href="https://math.libretexts.org/Bookshelves/Abstract_and_Geometric_Algebra/Visual_Group_Theory_(Carter)" rel="noopener" target="_blank">LibreTexts, Visual Group Theory</a></li></ul>
+</div>
+</div></details>
+<details class="toggle">
+<summary>Lab 1 dan kuis</summary>
+<div class="toggle-body"><div class="lab" id="grp1">
+<div class="lab-title"><h3><span class="pill blue lab-name-pill">Lab 3A. Arah Robot Pengantar</span></h3></div><div class="lab-sense-box"><h4>Cara membaca lab dan widget ini</h4><p>Gunakan widget dan visual untuk membaca aksi sebagai perubahan keadaan. Setelah satu aksi dilakukan, cari aksi yang mengembalikan keadaan ke awal; inilah makna invers yang lebih alami daripada rumus.</p></div>
+<p class="lab-objective"><strong>Tujuan lab:</strong> Lihat rotasi sebagai aksi yang bisa digabung dan dibatalkan.</p>
+<p class="predict-box"><strong>Sebelum klik tombol:</strong> tebak dulu hasilnya, lalu bandingkan dengan visualisasi.</p>
+<h4>Cerita penerapan</h4><p>Robot gudang berbelok kiri atau kanan dalam putaran seperempat. Robot perlu tahu apakah urutan putaran mengembalikannya ke arah awal.</p>
+<h4>Teori dasar</h4><p>Rotasi persegi membentuk grup hingga. Operasinya adalah komposisi. Identitas berarti tidak melakukan apa-apa. Setiap rotasi punya invers.</p>
+<div class="formula">\(R_4=\{0,90,180,270\},\quad a*b=(a+b)\bmod 360\)</div>
+<div class="two"><div><label>Urutan putaran, derajat</label><input id="grp1_seq" value="90,90,270,180"/><button onclick="grp1()">Jalankan putaran</button><label>Elemen untuk orde</label><input id="grp1_el" value="90"/><button class="green" onclick="grp1Order()">Cari orde</button></div><div><div class="svgbox" id="grp1_svg"></div><div class="result" id="grp1_out"></div></div></div>
+<div class="quiz"><h4>Cek pemahaman</h4>
+<div class="quiz-item">
+<p><strong>P1.</strong> Dalam grup rotasi persegi, berapa orde dari rotasi 90°?</p>
+<input id="grp1_q1" placeholder="Tulis jawabanmu"/>
+<button onclick="checkQuiz('grp1',1)">Cek</button>
+<div class="feedback hint" id="grp1_f1"></div>
+</div>
+<div class="quiz-item">
+<p><strong>P2.</strong> Sebutkan empat aksioma grup.</p>
+<textarea id="grp1_q2" placeholder="Tulis jawaban dan alasanmu"></textarea>
+<button onclick="checkQuiz('grp1',2)">Cek</button>
+<div class="feedback hint" id="grp1_f2"></div>
+</div>
+</div>
+</div></div>
+</details>
+<details class="toggle">
+<summary>Lab 2 dan kuis</summary>
+<div class="toggle-body"><div class="lab" id="grp2">
+<div class="lab-title"><h3><span class="pill blue lab-name-pill">Lab 3B. Tabel Simetri Stiker</span></h3></div><div class="lab-sense-box"><h4>Cara membaca lab dan widget ini</h4><p>Gunakan tabel sebagai catatan struktur. Baris dan kolom menunjukkan aksi yang digabung, sedangkan isi tabel menunjukkan hasilnya. Tabel membantu melihat apakah dunia aksi itu tertutup.</p></div>
+<p class="lab-objective"><strong>Tujuan lab:</strong> Baca tabel Cayley sebagai peta hasil gabungan semua aksi.</p>
+<p class="predict-box"><strong>Sebelum klik tombol:</strong> tebak dulu hasilnya, lalu bandingkan dengan visualisasi.</p>
+<h4>Cerita penerapan</h4><p>Bayangkan stiker berbentuk persegi dengan pola simetris. Beberapa putaran atau pencerminan membuat tampilannya tetap sama. Aksi-aksi seperti ini membentuk grup jika bisa digabung dan dibalik.</p>
+<h4>Teori dasar</h4><p>Tabel Cayley menunjukkan hasil penggabungan dua elemen grup. Pada tabel grup yang valid, setiap hasil tetap di dalam himpunan, ada identitas, dan setiap elemen punya invers.</p>
+<div class="formula">\(\operatorname{ord}(a)=\min\{k&gt;0:a^k=e\}\)</div>
+<div class="two"><div><label>Struktur</label><select id="grp2_choice"><option value="v4">Simetri empat Klein V4</option><option value="z3">Rotasi Z3</option><option value="bad">Tabel rusak</option></select><button onclick="grp2()">Buat tabel Cayley</button></div><div><div class="svgbox" id="grp2_svg"></div><div class="result" id="grp2_out"></div></div></div>
+<div class="quiz"><h4>Cek pemahaman</h4>
+<div class="quiz-item">
+<p><strong>P1.</strong> Di Z8 dengan operasi penjumlahan, berapa orde dari 2?</p>
+<input id="grp2_q1" placeholder="Tulis jawabanmu"/>
+<button onclick="checkQuiz('grp2',1)">Cek</button>
+<div class="feedback hint" id="grp2_f1"></div>
+</div>
+<div class="quiz-item">
+<p><strong>P2.</strong> Mengapa asosiativitas tetap diperlukan meskipun tabel Cayley terlihat lengkap?</p>
+<textarea id="grp2_q2" placeholder="Tulis jawaban dan alasanmu"></textarea>
+<button onclick="checkQuiz('grp2',2)">Cek</button>
+<div class="feedback hint" id="grp2_f2"></div>
+</div>
+</div>
+</div></div>
+</details>
+<div class="bottom-home-link"><a href="index.html">← Kembali ke Beranda</a></div>
+</main>
+<footer>Rumus dirender memakai MathJax v3 dengan output SVG. Buka dengan akses internet agar rumus tampil rapi.</footer>
+<script src="app.js"></script>
+</body>
+</html>

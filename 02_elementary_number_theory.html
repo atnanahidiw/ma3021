@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+
+<html lang="id">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>2. Teori Bilangan Dasar | Lab MA3021</title>
+<link href="styles.css" rel="stylesheet"/>
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']], processEscapes: true },
+  svg: { fontCache: 'global' },
+  startup: { typeset: true }
+};
+</script>
+<script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+<body>
+<header><div class="header-inner">
+<h1>2. Teori Bilangan Dasar</h1>
+<p>Dari digit pengecek sampai invers modulo</p>
+</div></header>
+<main>
+<details class="toggle">
+<summary>Materi Pengantar</summary>
+<div class="toggle-body"><p>Aritmetika modulo adalah cara berhitung dengan sisa pembagian. Contoh paling dekat adalah jam. Jika sekarang jam 10 dan kamu menambah 5 jam, hasilnya jam 3, bukan jam 15. Angka berputar kembali setelah melewati 12.</p><div class="formula">\[
+a\equiv b\pmod n
+\]</div><p>Rumus ini berarti \(a\) dan \(b\) punya sisa yang sama jika dibagi \(n\). Contoh: \(17\equiv 2\pmod 5\), karena 17 dibagi 5 bersisa 2.</p><p>Teori bilangan dasar penting karena struktur aljabar sering memakai operasi yang “berputar” seperti ini. Di \(\mathbb Z_n\), semua hasil penjumlahan dan perkalian dikembalikan menjadi sisa modulo \(n\).</p><section class="intro-note-section"><h4>Kenapa topik ini muncul?</h4><p>Modulo penting karena banyak sistem tidak membutuhkan angka penuh, melainkan posisi angka dalam sebuah siklus. Angka boleh terus bertambah, tetapi makna yang kita pakai sering kembali ke awal setelah melewati batas tertentu.</p><p>Dengan melihat angka melalui sisa pembagian, kita dapat menyederhanakan perhitungan tanpa kehilangan informasi yang relevan untuk masalah tersebut. Inilah alasan kongruensi, gcd, dan invers modulo muncul bersama dalam teori bilangan dasar.</p></section><div class="example-box"><h3>GCD dan invers modulo</h3>
+<p>GCD atau FPB menunjukkan pembagi terbesar yang sama-sama membagi dua bilangan. GCD menentukan apakah suatu bilangan punya invers modulo.</p>
+<div class="formula">\[
+ax\equiv1\pmod n \text{ punya solusi jika dan hanya jika } \gcd(a,n)=1
+\]</div>
+<p>Contoh: invers dari 7 modulo 40 adalah 23, karena \(7\cdot23=161\), dan \(161\equiv1\pmod{40}\).</p>
+</div>
+<div class="illustration-box">
+<h4>Visual bantu: modulo sebagai putaran sisa</h4>
+<svg aria-label="Diagram modulo sebagai lingkaran sisa" class="concept-svg" role="img" viewbox="0 0 720 250">
+<circle cx="360" cy="125" fill="#fff7ed" r="86" stroke="#fdba74" stroke-width="3"></circle>
+<g fill="#172033" font-size="17" text-anchor="middle">
+<text x="360" y="52">0</text><text x="420" y="77">1</text><text x="447" y="132">2</text>
+<text x="420" y="188">3</text><text x="360" y="210">4</text><text x="300" y="188">5</text>
+<text x="273" y="132">6</text><text x="300" y="77">7</text>
+</g>
+<path d="M360 125 L447 132" stroke="#2563eb" stroke-width="4"></path>
+<circle cx="447" cy="132" fill="#2563eb" r="8"></circle>
+<text fill="#172033" font-size="16" text-anchor="middle" x="360" y="126">17 mod 8</text>
+<text fill="#2563eb" font-size="18" font-weight="700" text-anchor="middle" x="360" y="145">= 1</text>
+<rect fill="#eff6ff" height="104" rx="14" stroke="#93c5fd" width="170" x="70" y="74"></rect>
+<text fill="#172033" font-size="15" text-anchor="middle" x="155" y="105">Kode barang</text>
+<text fill="#172033" font-size="22" font-weight="700" text-anchor="middle" x="155" y="132">7823?</text>
+<text fill="#64748b" font-size="14" text-anchor="middle" x="155" y="158">digit pengecek</text>
+<text fill="#64748b" font-size="15" x="485" y="80">Yang penting bukan angka besar,</text>
+<text fill="#64748b" font-size="15" x="485" y="104">tetapi sisanya.</text>
+</svg>
+<p class="svg-caption">Modulo berarti menghitung posisi akhir setelah angka berputar melewati batas.</p>
+</div>
+<div class="application-box"><h3>Aplikasi nyata dan koneksinya</h3><p>Aritmetika modulo memberi cara untuk memandang angka sebagai kelas sisa. Dua angka yang sangat berbeda bisa dianggap setara jika mereka meninggalkan sisa yang sama. Ini berguna ketika yang ingin kita jaga adalah pola siklus, bukan ukuran absolut angka. Dari sudut pandang ini, operasi tambah dan kali tetap bisa dilakukan, tetapi hasilnya selalu dibaca kembali ke kelas sisa.</p><p>Invers modulo memperdalam ide ini. Dalam bilangan biasa, membagi dengan a berarti mengalikan dengan kebalikan a. Dalam modulo, kebalikan seperti itu tidak selalu ada. Syarat gcd(a,n)=1 menjelaskan kapan perkalian oleh a tidak mencampur kelas sisa secara merusak, sehingga operasi itu masih bisa dibalik.</p></div>
+<div class="summary-box">
+<h3>Ringkasan agar tidak tersesat</h3>
+<div class="summary-grid"><div><strong>Inti:</strong><br/>Modulo membaca angka dari sisa pembagian.</div><div><strong>Aturan penting:</strong><br/>Kongruen berarti berada pada kelas sisa yang sama.</div><div><strong>Yang dicek:</strong><br/>Invers modulo ada jika angka dan modulus relatif prima.</div></div>
+<div class="mistake-inside-box">
+<h4>Kesalahan umum</h4>
+<ul><li>Mengira a≡b mod n berarti a sama dengan b. Yang sama hanya sisanya.</li><li>Mengira semua angka punya invers modulo. Invers butuh gcd(a,n)=1.</li><li>Lupa bahwa hasil modulo dibaca kembali ke rentang 0 sampai n−1.</li></ul>
+</div>
+<div class="mini-visual-box">
+<h4>Bagian rawan bingung: invers modulo</h4>
+<svg aria-label="Invers modulo ada jika gcd sama dengan 1" class="mini-svg" role="img" viewbox="0 0 520 160">
+<rect fill="#ecfdf5" height="90" rx="14" stroke="#86efac" width="185" x="50" y="35"></rect>
+<text font-size="16" font-weight="700" text-anchor="middle" x="142" y="64">mod 7</text>
+<text fill="#047857" font-size="20" text-anchor="middle" x="142" y="95">3 × 5 ≡ 1</text>
+<text fill="#64748b" font-size="12" text-anchor="middle" x="142" y="115">3 punya invers</text>
+<rect fill="#fff7ed" height="90" rx="14" stroke="#fdba74" width="185" x="285" y="35"></rect>
+<text font-size="16" font-weight="700" text-anchor="middle" x="377" y="64">mod 6</text>
+<text fill="#b91c1c" font-size="20" text-anchor="middle" x="377" y="95">2 × ? ≠ 1</text>
+<text fill="#64748b" font-size="12" text-anchor="middle" x="377" y="115">gcd(2,6)=2</text>
+</svg>
+<p>Invers modulo bukan kebalikan biasa. Angka a punya invers modulo n hanya jika a dan n tidak punya faktor bersama selain 1.</p>
+</div>
+</div>
+<div class="complete-box">
+<h3>Inti konsep yang harus dibawa pulang</h3>
+<p>Modulo adalah bahasa untuk membaca angka berdasarkan sisa dan siklus. Kongruensi menyatakan bahwa dua angka berada di kelas sisa yang sama. GCD membantu melihat hubungan faktor bersama, sedangkan invers modulo menjawab kapan operasi perkalian masih bisa dibalik di dunia sisa. Jadi teori bilangan dasar bukan kumpulan trik hitung, tetapi cara memahami struktur tersembunyi di balik pembagian.</p>
+</div>
+<div class="source-box">
+<h3>Pelajari lebih lanjut</h3>
+<ul class="source-list"><li><a href="https://pendidikan-matematika.fmipa.unesa.ac.id/post/kekongruenan-modulo-rahasia-matematika-di-balik-keamanan-digital" rel="noopener" target="_blank">Materi terkait Bahasa Indonesia: kekongruenan modulo dan keamanan digital</a></li>
+<li><a href="https://www.slideshare.net/slideshow/modul-3-kongruensi/75083044" rel="noopener" target="_blank">Materi Indonesia: kongruensi modulo</a></li>
+<li><a href="https://csrc.nist.gov/pubs/fips/186-5/final" rel="noopener" target="_blank">NIST FIPS 186-5, Digital Signature Standard</a></li>
+<li><a href="https://www.khanacademy.org/computing/computer-science/cryptography/modarithmetic/a/what-is-modular-arithmetic" rel="noopener" target="_blank">Khan Academy, modular arithmetic</a></li></ul>
+</div>
+</div></details>
+<details class="toggle">
+<summary>Lab 1 dan kuis</summary>
+<div class="toggle-body"><div class="lab" id="num1">
+<div class="lab-title"><h3><span class="pill blue lab-name-pill">Lab 2A. Barcode Cek Digit</span></h3></div><div class="lab-sense-box"><h4>Cara membaca lab dan widget ini</h4><p>Gunakan widget untuk melihat bagaimana sisa berubah ketika input berubah. Fokusnya bukan menebak angka akhir, tetapi memahami mengapa kelas sisa bisa dipakai sebagai pemeriksa pola.</p></div>
+<p class="lab-objective"><strong>Tujuan lab:</strong> Lihat bagaimana modulo mengubah kode menjadi uji sisa pembagian.</p>
+<p class="predict-box"><strong>Sebelum klik tombol:</strong> tebak dulu hasilnya, lalu bandingkan dengan visualisasi.</p>
+<h4>Cerita penerapan</h4><p>Kasir salah mengetik satu digit kode produk. Digit pengecek dapat menangkap banyak kesalahan dengan memaksa jumlah digit masuk ke kelas kongruensi tertentu.</p>
+<h4>Teori dasar</h4><p>Aritmetika modulo mengelompokkan banyak bilangan berdasarkan sisa yang sama. Uji kongruensi dapat memeriksa apakah kode yang dikirim masih memenuhi aturan.</p>
+<div class="formula">\(a\equiv b\pmod n \iff n\mid(a-b)\)</div>
+<div class="two"><div><label>Awalan kode</label><input id="num1_prefix" value="314159"/><label>Modulo</label><input id="num1_mod" type="number" value="10"/><button onclick="num1()">Buat digit pengecek</button><label>Uji kode lengkap</label><input id="num1_full" value=""/><button class="green" onclick="num1Test()">Uji kode</button></div><div><div class="svgbox" id="num1_svg"></div><div class="result" id="num1_out"></div></div></div>
+<div class="quiz"><h4>Cek pemahaman</h4>
+<div class="quiz-item">
+<p><strong>P1.</strong> Cari x sehingga 7+8+2+x ≡ 0 mod 5.</p>
+<input id="num1_q1" placeholder="Tulis jawabanmu"/>
+<button onclick="checkQuiz('num1',1)">Cek</button>
+<div class="feedback hint" id="num1_f1"></div>
+</div>
+<div class="quiz-item">
+<p><strong>P2.</strong> Jelaskan mengapa digit pengecek dapat mendeteksi sebagian kesalahan ketik.</p>
+<textarea id="num1_q2" placeholder="Tulis jawaban dan alasanmu"></textarea>
+<button onclick="checkQuiz('num1',2)">Cek</button>
+<div class="feedback hint" id="num1_f2"></div>
+</div>
+</div>
+</div></div>
+</details>
+<details class="toggle">
+<summary>Lab 2 dan kuis</summary>
+<div class="toggle-body"><div class="lab" id="num2">
+<div class="lab-title"><h3><span class="pill blue lab-name-pill">Lab 2B. Mini Lab Kunci RSA</span></h3></div><div class="lab-sense-box"><h4>Cara membaca lab dan widget ini</h4><p>Gunakan widget untuk memahami bahwa invers modulo bukan otomatis ada. Perhatikan hubungan antara angka yang dipilih dan modulusnya; dari sanalah syarat relatif prima menjadi masuk akal.</p></div>
+<p class="lab-objective"><strong>Tujuan lab:</strong> Lihat kenapa invers modulo hanya muncul saat gcd bernilai 1.</p>
+<p class="predict-box"><strong>Sebelum klik tombol:</strong> tebak dulu hasilnya, lalu bandingkan dengan visualisasi.</p>
+<h4>Cerita penerapan</h4><p>Sistem pesan aman membutuhkan bilangan d yang membalik eksponen e modulo φ(n). Algoritma Euclid diperluas dapat mencari invers modulo itu.</p>
+<h4>Teori dasar</h4><p>Jika gcd(e,m)=1, maka ada bilangan bulat d sehingga ed ≡ 1 mod m. Ini adalah identitas Bezout yang sedang bekerja.</p>
+<div class="formula">\(\gcd(e,m)=1 \Rightarrow \exists d:\ ed\equiv1\pmod m\)</div>
+<div class="two"><div><label>e</label><input id="num2_e" type="number" value="7"/><label>m = φ(n)</label><input id="num2_m" type="number" value="40"/><button onclick="num2()">Cari invers d</button></div><div><div class="svgbox" id="num2_svg"></div><div class="result" id="num2_out"></div></div></div>
+<div class="quiz"><h4>Cek pemahaman</h4>
+<div class="quiz-item">
+<p><strong>P1.</strong> Cari invers dari 7 modulo 40.</p>
+<input id="num2_q1" placeholder="Tulis jawabanmu"/>
+<button onclick="checkQuiz('num2',1)">Cek</button>
+<div class="feedback hint" id="num2_f1"></div>
+</div>
+<div class="quiz-item">
+<p><strong>P2.</strong> Mengapa invers tidak ada ketika gcd(e,m)&gt;1?</p>
+<textarea id="num2_q2" placeholder="Tulis jawaban dan alasanmu"></textarea>
+<button onclick="checkQuiz('num2',2)">Cek</button>
+<div class="feedback hint" id="num2_f2"></div>
+</div>
+</div>
+</div></div>
+</details>
+<div class="bottom-home-link"><a href="index.html">← Kembali ke Beranda</a></div>
+</main>
+<footer>Rumus dirender memakai MathJax v3 dengan output SVG. Buka dengan akses internet agar rumus tampil rapi.</footer>
+<script src="app.js"></script>
+</body>
+</html>

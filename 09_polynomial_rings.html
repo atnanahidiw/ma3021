@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+
+<html lang="id">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>9. Ring Polinomial | Lab MA3021</title>
+<link href="styles.css" rel="stylesheet"/>
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']], processEscapes: true },
+  svg: { fontCache: 'global' },
+  startup: { typeset: true }
+};
+</script>
+<script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+<body>
+<header><div class="header-inner">
+<h1>9. Ring Polinomial</h1>
+<p>Dari pengkodean gaya QR sampai konvolusi</p>
+</div></header>
+<main>
+<details class="toggle">
+<summary>Materi Pengantar</summary>
+<div class="toggle-body"><p>Ring polinomial adalah tempat kita memperlakukan polinomial sebagai objek aljabar. Koefisiennya bisa berasal dari bilangan biasa, bilangan modulo prima, atau field berhingga.</p><div class="formula">\[
+f(x)=a_0+a_1x+\cdots+a_kx^k
+\]</div><p>Penjumlahan polinomial dilakukan dengan menjumlahkan koefisien yang pangkatnya sama. Perkalian polinomial dilakukan dengan mengalikan semua pasangan suku, lalu menggabungkan suku yang derajatnya sama.</p><div class="formula">\[
+(a_ix^i)(b_jx^j)=a_ib_jx^{i+j}
+\]</div><p>Contoh: di \(\mathbb Z_7\), jika \(f(x)=1+2x+3x^2\), maka \(f(2)=1+4+12=17\equiv3\pmod7\).</p><section class="intro-note-section"><h4>Kenapa topik ini muncul?</h4><p>Ring polinomial muncul ketika kita ingin memperlakukan ekspresi polinomial sebagai objek aljabar, bukan hanya rumus untuk dihitung. Koefisien berasal dari sebuah ring atau field, lalu polinomial membentuk dunia baru di atasnya.</p><p>Dengan cara ini, daftar koefisien dapat ditambah, dikali, dan dimanipulasi secara sistematis. Polinomial menjadi jembatan antara data berbentuk daftar dan struktur aljabar yang punya operasi.</p></section><div class="example-box"><h3>Contoh evaluasi</h3><p>Misalkan pesan pendek ditulis sebagai koefisien: (3,1,4) menjadi \(3+x+4x^2\). Saat polinomial ini dievaluasi di beberapa titik, hasilnya dapat dipakai sebagai simbol tambahan.</p></div>
+<div class="illustration-box">
+<h4>Visual bantu: pesan menjadi polinomial</h4>
+<svg aria-label="Diagram pesan sebagai koefisien polinomial" class="concept-svg" role="img" viewbox="0 0 720 250">
+<defs><marker id="arr9" markerheight="7" markerwidth="7" orient="auto" refx="9" refy="5" viewbox="0 0 10 10"><path d="M0 0 L10 5 L0 10 Z" fill="#2563eb"></path></marker></defs>
+<rect fill="#eff6ff" height="90" rx="16" stroke="#93c5fd" width="190" x="55" y="70"></rect>
+<text fill="#172033" font-size="16" text-anchor="middle" x="150" y="101">Pesan</text>
+<text fill="#172033" font-size="24" font-weight="700" text-anchor="middle" x="150" y="134">(3, 1, 4)</text>
+<line marker-end="url(#arr9)" stroke="#2563eb" stroke-width="4" x1="260" x2="350" y1="115" y2="115"></line>
+<rect fill="#ecfdf5" height="90" rx="16" stroke="#86efac" width="280" x="365" y="70"></rect>
+<text fill="#172033" font-size="16" text-anchor="middle" x="505" y="101">Polinomial</text>
+<text fill="#172033" font-size="24" font-weight="700" text-anchor="middle" x="505" y="134">3 + x + 4x²</text>
+<text fill="#64748b" font-size="16" text-anchor="middle" x="360" y="210">Evaluasi di beberapa titik memberi simbol tambahan untuk deteksi/pemulihan error.</text>
+</svg>
+<p class="svg-caption">Daftar angka dapat dibaca sebagai koefisien polinomial, lalu dievaluasi menjadi simbol tambahan.</p>
+</div>
+<div class="application-box"><h3>Aplikasi nyata dan koneksinya</h3><p>Ring polinomial memberi bahasa untuk memproses data yang tersusun sebagai koefisien. Yang penting bukan hanya nilai polinomial pada satu titik, tetapi seluruh objek polinomialnya: koefisien, derajat, operasi penjumlahan, operasi perkalian, dan kemungkinan evaluasi.</p><p>Evaluasi polinomial adalah langkah tambahan yang mengubah objek polinomial menjadi nilai pada titik tertentu. Ini berbeda dari koefisien. Koefisien menyimpan bentuk internal objek, sedangkan nilai evaluasi adalah hasil membaca objek itu dari titik tertentu. Perbedaan ini penting dalam coding theory, interpolasi, dan konstruksi finite field.</p></div>
+<div class="summary-box">
+<h3>Ringkasan agar tidak tersesat</h3>
+<div class="summary-grid"><div><strong>Inti:</strong><br/>Polinomial dapat mewakili data.</div><div><strong>Aturan penting:</strong><br/>Koefisien adalah pesan; nilai evaluasi adalah simbol hasil.</div><div><strong>Yang dicek:</strong><br/>Operasi polinomial bergantung pada ring atau field koefisien.</div></div>
+<div class="mistake-inside-box">
+<h4>Kesalahan umum</h4>
+<ul><li>Mengira polinomial hanya rumus sekolah. Dalam coding theory, polinomial dapat menyimpan pesan.</li><li>Mengira evaluasi polinomial tidak menambah manfaat. Titik tambahan adalah redundansi.</li><li>Lupa bahwa operasi polinomial bergantung pada ring/field koefisiennya.</li></ul>
+</div>
+<p class="summary-note">Cara cepat mengingat: polinomial bisa berfungsi sebagai kemasan data. Koefisien adalah isi pesan; evaluasi adalah cara menghasilkan simbol baru.</p><div class="mini-visual-box">
+<h4>Bagian rawan bingung: koefisien vs evaluasi</h4>
+<svg aria-label="Koefisien polinomial dan titik evaluasi" class="mini-svg" role="img" viewbox="0 0 520 170">
+<defs><marker id="m9" markerheight="6" markerwidth="6" orient="auto" refx="9" refy="5" viewbox="0 0 10 10"><path d="M0 0 L10 5 L0 10 Z" fill="#2563eb"></path></marker></defs>
+<rect fill="#eff6ff" height="80" rx="14" stroke="#93c5fd" width="150" x="40" y="50"></rect>
+<text font-size="15" font-weight="700" text-anchor="middle" x="115" y="80">Koefisien</text>
+<text font-size="20" text-anchor="middle" x="115" y="108">(3,1,4)</text>
+<line marker-end="url(#m9)" stroke="#2563eb" stroke-width="3" x1="205" x2="300" y1="90" y2="90"></line>
+<text fill="#64748b" font-size="13" text-anchor="middle" x="252" y="73">evaluasi</text>
+<rect fill="#ecfdf5" height="80" rx="14" stroke="#86efac" width="160" x="320" y="50"></rect>
+<text font-size="15" font-weight="700" text-anchor="middle" x="400" y="80">Nilai titik</text>
+<text font-size="20" text-anchor="middle" x="400" y="108">f(0), f(1), f(2)</text>
+</svg>
+<p>Koefisien adalah pesan. Nilai evaluasi adalah hasil pengiriman di titik tertentu. Keduanya bukan hal yang sama.</p>
+</div>
+</div>
+<div class="complete-box">
+<h3>Inti konsep yang harus dibawa pulang</h3>
+<p>Ring polinomial membuat polinomial menjadi objek aljabar yang bisa dioperasikan. Koefisien menentukan isi polinomial, operasi tambah dan kali menentukan cara polinomial berinteraksi, dan evaluasi memberi cara membaca polinomial pada titik tertentu. Dengan memahami perbedaan koefisien dan evaluasi, polinomial tidak lagi terasa seperti rumus sekolah, tetapi sebagai struktur untuk memproses informasi.</p>
+</div>
+<div class="source-box">
+<h3>Pelajari lebih lanjut</h3>
+<ul class="source-list"><li><a href="https://tahtamedia.co.id/index.php/issj/article/download/1162/1160/4274" rel="noopener" target="_blank">Materi terkait Bahasa Indonesia: gelanggang polinomial</a></li>
+<li><a href="https://modul.pkbm.id/paket-c/Modul%205%20Matematika%20Peminatan%20Paket%20C%20Penerapan%20Polinomial%20dalam%20Pengembangan%20Ilmu%20dan%20Teknologi%20Sehari-hari.pdf" rel="noopener" target="_blank">Modul Indonesia: polinomial dan penerapannya</a></li>
+<li><a href="https://repo.uinsatu.ac.id/33242/1/STRUKTUR%20ALJABAR%20%28Bapak%20muniri%29.pdf" rel="noopener" target="_blank">Buku Indonesia: polinomial dalam struktur aljabar</a></li>
+<li><a href="https://www.ll.mit.edu/impact/empowering-digital-communications" rel="noopener" target="_blank">MIT Lincoln Laboratory, Reed-Solomon and barcodes</a></li>
+<li><a href="https://ocw.mit.edu/courses/6-451-principles-of-digital-communication-ii-spring-2005/01060b08ba74792ee8d85eb82b9efdb4_chap8.pdf" rel="noopener" target="_blank">MIT OCW Reed-Solomon codes chapter</a></li></ul>
+</div>
+</div></details>
+<details class="toggle">
+<summary>Lab 1 dan kuis</summary>
+<div class="toggle-body"><div class="lab" id="poly1">
+<div class="lab-title"><h3><span class="pill blue lab-name-pill">Lab 9A. Pesan QR sebagai Polinomial</span></h3></div><div class="lab-sense-box"><h4>Cara membaca lab dan widget ini</h4><p>Gunakan widget untuk melihat koefisien sebagai isi internal polinomial. Saat koefisien berubah, objek polinomial berubah, walaupun bentuk umumnya masih sama.</p></div>
+<p class="lab-objective"><strong>Tujuan lab:</strong> Lihat pesan sebagai koefisien polinomial dan evaluasi sebagai simbol tambahan.</p>
+<p class="predict-box"><strong>Sebelum klik tombol:</strong> tebak dulu hasilnya, lalu bandingkan dengan visualisasi.</p>
+<h4>Cerita penerapan</h4><p>Kode bergaya QR dapat memperlakukan pesan sebagai koefisien polinomial, lalu mengevaluasi polinomial di beberapa titik field. Titik tambahan menciptakan redundansi.</p>
+<h4>Teori dasar</h4><p>Di atas field berhingga, evaluasi polinomial stabil karena koefisien dan hasilnya tetap berada di dalam field.</p>
+<div class="formula">\(f(x)=a_0+a_1x+\cdots+a_kx^k,\quad f(\alpha_i)\in\mathbb F_q\)</div>
+<div class="two"><div><label>Prima p</label><input id="poly1_p" type="number" value="7"/><label>Koefisien pesan</label><input id="poly1_coeff" value="3,1,4"/><button onclick="poly1()">Kodekan dengan evaluasi</button></div><div><div class="svgbox" id="poly1_svg"></div><div class="result" id="poly1_out"></div></div></div>
+<div class="quiz"><h4>Cek pemahaman</h4>
+<div class="quiz-item">
+<p><strong>P1.</strong> Di Z7, hitung f(x)=1+2x+3x² pada x=2.</p>
+<input id="poly1_q1" placeholder="Tulis jawabanmu"/>
+<button onclick="checkQuiz('poly1',1)">Cek</button>
+<div class="feedback hint" id="poly1_f1"></div>
+</div>
+<div class="quiz-item">
+<p><strong>P2.</strong> Mengapa evaluasi polinomial menambah redundansi pada pengkodean bergaya Reed-Solomon?</p>
+<textarea id="poly1_q2" placeholder="Tulis jawaban dan alasanmu"></textarea>
+<button onclick="checkQuiz('poly1',2)">Cek</button>
+<div class="feedback hint" id="poly1_f2"></div>
+</div>
+</div>
+</div></div>
+</details>
+<details class="toggle">
+<summary>Lab 2 dan kuis</summary>
+<div class="toggle-body"><div class="lab" id="poly2">
+<div class="lab-title"><h3><span class="pill blue lab-name-pill">Lab 9B. Konvolusi Filter Audio</span></h3></div><div class="lab-sense-box"><h4>Cara membaca lab dan widget ini</h4><p>Gunakan widget untuk membedakan objek dan hasil bacaan. Evaluasi bukan menambah koefisien baru, tetapi membaca polinomial pada titik tertentu.</p></div>
+<p class="lab-objective"><strong>Tujuan lab:</strong> Lihat perkalian polinomial sebagai pencampuran koefisien sinyal.</p>
+<p class="predict-box"><strong>Sebelum klik tombol:</strong> tebak dulu hasilnya, lalu bandingkan dengan visualisasi.</p>
+<h4>Cerita penerapan</h4><p>Filter audio sederhana menggabungkan sampel suara yang berdekatan. Dalam versi kecil, perkalian polinomial memodelkan konvolusi: koefisien dari dua sinyal bercampur berdasarkan derajatnya.</p>
+<h4>Teori dasar</h4><p>Dalam ring polinomial, perkalian memakai aturan x^i x^j = x^{i+j}. Koefisien dengan derajat yang sama dijumlahkan.</p>
+<div class="formula">\((a_ix^i)(b_jx^j)=a_ib_jx^{i+j}\)</div>
+<div class="two"><div><label>p</label><input id="poly2_p" type="number" value="11"/><label>Koefisien f</label><input id="poly2_f" value="1,2,1"/><label>Koefisien g</label><input id="poly2_g" value="3,4"/><button onclick="poly2()">Kalikan polinomial</button></div><div><div class="svgbox" id="poly2_svg"></div><div class="result" id="poly2_out"></div></div></div>
+<div class="quiz"><h4>Cek pemahaman</h4>
+<div class="quiz-item">
+<p><strong>P1.</strong> Di Z5, hitung (1+2x)+(4+3x).</p>
+<input id="poly2_q1" placeholder="Tulis jawabanmu"/>
+<button onclick="checkQuiz('poly2',1)">Cek</button>
+<div class="feedback hint" id="poly2_f1"></div>
+</div>
+<div class="quiz-item">
+<p><strong>P2.</strong> Tuliskan aturan koefisien pada perkalian polinomial.</p>
+<textarea id="poly2_q2" placeholder="Tulis jawaban dan alasanmu"></textarea>
+<button onclick="checkQuiz('poly2',2)">Cek</button>
+<div class="feedback hint" id="poly2_f2"></div>
+</div>
+</div>
+</div></div>
+</details>
+<div class="bottom-home-link"><a href="index.html">← Kembali ke Beranda</a></div>
+</main>
+<footer>Rumus dirender memakai MathJax v3 dengan output SVG. Buka dengan akses internet agar rumus tampil rapi.</footer>
+<script src="app.js"></script>
+</body>
+</html>

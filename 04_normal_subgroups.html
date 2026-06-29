@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+
+<html lang="id">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>4. Subgrup Normal | Lab MA3021</title>
+<link href="styles.css" rel="stylesheet"/>
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']], processEscapes: true },
+  svg: { fontCache: 'global' },
+  startup: { typeset: true }
+};
+</script>
+<script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+<body>
+<header><div class="header-inner">
+<h1>4. Subgrup Normal</h1>
+<p>Dari koset sampai sistem hasil bagi yang konsisten</p>
+</div></header>
+<main>
+<details class="toggle">
+<summary>Materi Pengantar</summary>
+<div class="toggle-body"><p>Koset adalah cara membagi grup menjadi blok-blok yang ukurannya sama. Bayangkan kamu punya angka modulo 12, lalu ingin mengelompokkan angka berdasarkan pola tertentu. Setiap blok berisi anggota yang dianggap satu kelas.</p><div class="formula">\[
+aH=\{ah:h\in H\}
+\]</div><p>Rumus ini berarti: ambil elemen \(a\), lalu gabungkan dengan semua elemen di subgrup \(H\). Hasilnya disebut koset kiri. Ada juga koset kanan, yaitu \(Ha\).</p><p>Subgrup normal adalah subgrup yang koset kiri dan koset kanannya selalu sama.</p><div class="formula">\[
+H\triangleleft G \iff aH=Ha\text{ untuk setiap }a\in G
+\]</div><p>Kenapa harus normal? Karena kita ingin koset-koset itu bisa diperlakukan seperti elemen baru. Jika hasil operasi antar koset bergantung pada wakil yang dipilih, struktur barunya tidak konsisten.</p><section class="intro-note-section"><h4>Kenapa topik ini muncul?</h4><p>Subgrup normal muncul ketika kita ingin merangkum grup tanpa menghancurkan operasinya. Kita tidak selalu ingin melihat elemen satu per satu; kadang kita ingin melihat kelas atau blok elemen.</p><p>Namun merangkum struktur berbahaya jika operasi antarblok menjadi tidak jelas. Normalitas adalah syarat yang memastikan bahwa blok-blok tersebut dapat diperlakukan sebagai elemen baru dengan aturan operasi yang konsisten.</p></section><div class="example-box"><h3>Contoh pelan</h3>
+<p>Di \(\mathbb Z_{12}\), ambil \(H=\{0,4,8\}\). Maka \(2+H=\{2,6,10\}\). Koset ini adalah satu blok. Blok lain bisa dibuat dengan angka awal yang berbeda.</p>
+</div>
+<div class="illustration-box">
+<h4>Visual bantu: koset sebagai blok</h4>
+<svg aria-label="Diagram koset sebagai blok" class="concept-svg" role="img" viewbox="0 0 720 250">
+<rect fill="#eff6ff" height="140" rx="16" stroke="#93c5fd" width="150" x="60" y="50"></rect>
+<rect fill="#ecfdf5" height="140" rx="16" stroke="#86efac" width="150" x="285" y="50"></rect>
+<rect fill="#fff7ed" height="140" rx="16" stroke="#fdba74" width="150" x="510" y="50"></rect>
+<text fill="#172033" font-size="18" font-weight="700" text-anchor="middle" x="135" y="82">H</text>
+<text fill="#172033" font-size="18" font-weight="700" text-anchor="middle" x="360" y="82">2 + H</text>
+<text fill="#172033" font-size="18" font-weight="700" text-anchor="middle" x="585" y="82">1 + H</text>
+<text fill="#172033" font-size="17" text-anchor="middle" x="135" y="120">0, 4, 8</text>
+<text fill="#172033" font-size="17" text-anchor="middle" x="360" y="120">2, 6, 10</text>
+<text fill="#172033" font-size="17" text-anchor="middle" x="585" y="120">1, 5, 9</text>
+<text fill="#64748b" font-size="16" text-anchor="middle" x="360" y="218">Setiap kotak adalah satu kelas. Operasi quotient bekerja pada kotak, bukan elemen satu per satu.</text>
+</svg>
+<p class="svg-caption">Quotient melihat satu blok sebagai satu objek baru. Normalitas membuat operasi antarblok konsisten.</p>
+</div>
+<div class="application-box"><h3>Aplikasi nyata dan koneksinya</h3><p>Koset dapat dibaca sebagai blok yang berisi elemen-elemen yang dianggap setara dari sudut pandang tertentu. Ketika kita membentuk quotient group, kita tidak lagi mengoperasikan elemen tunggal, tetapi mengoperasikan blok. Ini hanya masuk akal jika hasil operasi blok tidak bergantung pada wakil elemen yang dipilih.</p><p>Normalitas menjawab masalah wakil tersebut. Jika dua wakil dari blok yang sama bisa menghasilkan blok tujuan berbeda, maka operasi quotient menjadi ambigu. Jadi subgrup normal bukan detail teknis kecil; ia adalah syarat agar penyederhanaan grup tetap mempunyai struktur grup yang sah.</p></div>
+<div class="summary-box">
+<h3>Ringkasan agar tidak tersesat</h3>
+<div class="summary-grid"><div><strong>Inti:</strong><br/>Koset adalah blok elemen.</div><div><strong>Aturan penting:</strong><br/>Normalitas membuat operasi antarblok konsisten.</div><div><strong>Yang dicek:</strong><br/>Quotient group adalah grup baru yang elemennya berupa blok.</div></div>
+<div class="mistake-inside-box">
+<h4>Kesalahan umum</h4>
+<ul><li>Mengira semua subgrup selalu normal. Itu hanya otomatis pada grup abelian.</li><li>Mengira quotient hanya membuang informasi. Quotient membuat sistem baru dari kelas-kelas elemen.</li><li>Lupa bahwa masalah utama normalitas adalah konsistensi operasi.</li></ul>
+</div>
+<p class="summary-note">Cara cepat mengingat: normalitas adalah izin untuk membuat versi ringkas dari grup. Jika pilihan wakil blok mengubah hasil, quotient tidak aman dipakai.</p><div class="mini-visual-box">
+<h4>Bagian rawan bingung: wakil koset</h4>
+<svg aria-label="Wakil koset memberi hasil blok yang sama" class="mini-svg" role="img" viewbox="0 0 520 170">
+<rect fill="#eff6ff" height="80" rx="14" stroke="#93c5fd" width="120" x="45" y="45"></rect>
+<text font-size="15" font-weight="700" text-anchor="middle" x="105" y="75">Blok A</text>
+<text font-size="14" text-anchor="middle" x="105" y="103">a₁, a₂</text>
+<rect fill="#ecfdf5" height="80" rx="14" stroke="#86efac" width="120" x="205" y="45"></rect>
+<text font-size="15" font-weight="700" text-anchor="middle" x="265" y="75">Blok B</text>
+<text font-size="14" text-anchor="middle" x="265" y="103">b₁, b₂</text>
+<rect fill="#fefce8" height="80" rx="14" stroke="#fde68a" width="120" x="365" y="45"></rect>
+<text font-size="15" font-weight="700" text-anchor="middle" x="425" y="75">Hasil</text>
+<text font-size="14" text-anchor="middle" x="425" y="103">Blok C</text>
+<text fill="#64748b" font-size="13" text-anchor="middle" x="260" y="150">a₁·b₁ dan a₂·b₂ harus jatuh ke blok hasil yang sama.</text>
+</svg>
+<p>Quotient aman hanya jika pilihan wakil tidak mengubah hasil blok. Inilah alasan normalitas diperlukan.</p>
+</div>
+</div>
+<div class="complete-box">
+<h3>Inti konsep yang harus dibawa pulang</h3>
+<p>Subgrup normal memungkinkan grup diringkas menjadi quotient group. Koset menjadi elemen baru, dan operasi dilakukan antarblok. Normalitas memastikan bahwa hasil operasi tidak bergantung pada wakil yang dipilih dari tiap blok. Tanpa normalitas, quotient group tidak memiliki aturan operasi yang terdefinisi dengan baik. Jadi normalitas adalah syarat agar proses merangkum tidak mengubah struktur menjadi ambigu.</p>
+</div>
+<div class="source-box">
+<h3>Pelajari lebih lanjut</h3>
+<ul class="source-list"><li><a href="https://repo.uinsatu.ac.id/33242/1/STRUKTUR%20ALJABAR%20%28Bapak%20muniri%29.pdf" rel="noopener" target="_blank">Materi terkait Bahasa Indonesia: subgrup normal dan grup faktor</a></li>
+<li><a href="https://tahtamedia.co.id/index.php/issj/article/download/1162/1160/4274" rel="noopener" target="_blank">Buku Indonesia: subgrup normal dan grup faktor</a></li>
+<li><a href="https://repository.uinsu.ac.id/17153/1/e-modul%20Struktur%20Aljabar%20Grup_compressed.pdf" rel="noopener" target="_blank">E-modul Indonesia: subgrup dan struktur grup</a></li>
+<li><a href="https://doc.sagemath.org/html/en/thematic_tutorials/group_theory.html" rel="noopener" target="_blank">SageMath group theory tutorial</a></li>
+<li><a href="https://nathancarter.github.io/group-explorer/index.html" rel="noopener" target="_blank">Group Explorer</a></li></ul>
+</div>
+</div></details>
+<details class="toggle">
+<summary>Lab 1 dan kuis</summary>
+<div class="toggle-body"><div class="lab" id="norm1">
+<div class="lab-title"><h3><span class="pill blue lab-name-pill">Lab 4A. Penyederhanaan Arah Peta</span></h3></div><div class="lab-sense-box"><h4>Cara membaca lab dan widget ini</h4><p>Gunakan widget dan visual untuk melihat koset sebagai blok. Jangan mulai dari daftar simbol; mulai dari pertanyaan apakah satu blok bisa diperlakukan sebagai satu objek baru.</p></div>
+<p class="lab-objective"><strong>Tujuan lab:</strong> Lihat koset sebagai blok untuk menyederhanakan banyak state.</p>
+<p class="predict-box"><strong>Sebelum klik tombol:</strong> tebak dulu hasilnya, lalu bandingkan dengan visualisasi.</p>
+<h4>Cerita penerapan</h4><p>Aplikasi navigasi dapat menyederhanakan dua belas arah menjadi kelas arah. Grup hasil bagi aman hanya jika perkalian kelas terdefinisi dengan konsisten.</p>
+<h4>Teori dasar</h4><p>Dalam grup abelian, setiap subgrup adalah normal. Koset membagi grup menjadi blok-blok berukuran sama.</p>
+<div class="formula">\(aH=\{ah:h\in H\},\quad H\triangleleft G \iff aH=Ha\ \forall a\in G\)</div>
+<div class="two"><div><label>Z_n</label><input id="norm1_n" type="number" value="12"/><label>Subgrup yang dibangkitkan oleh d</label><input id="norm1_d" type="number" value="4"/><label>Elemen a</label><input id="norm1_a" type="number" value="2"/><button onclick="norm1()">Gambar koset</button></div><div><div class="svgbox" id="norm1_svg"></div><div class="result" id="norm1_out"></div></div></div>
+<div class="quiz"><h4>Cek pemahaman</h4>
+<div class="quiz-item">
+<p><strong>P1.</strong> Di Z12, H={0,4,8}. Tuliskan 2+H.</p>
+<input id="norm1_q1" placeholder="Tulis jawabanmu"/>
+<button onclick="checkQuiz('norm1',1)">Cek</button>
+<div class="feedback hint" id="norm1_f1"></div>
+</div>
+<div class="quiz-item">
+<p><strong>P2.</strong> Mengapa setiap subgrup dari grup abelian adalah normal?</p>
+<textarea id="norm1_q2" placeholder="Tulis jawaban dan alasanmu"></textarea>
+<button onclick="checkQuiz('norm1',2)">Cek</button>
+<div class="feedback hint" id="norm1_f2"></div>
+</div>
+</div>
+</div></div>
+</details>
+<details class="toggle">
+<summary>Lab 2 dan kuis</summary>
+<div class="toggle-body"><div class="lab" id="norm2">
+<div class="lab-title"><h3><span class="pill blue lab-name-pill">Lab 4B. Normalitas Susunan 3 Kartu</span></h3></div><div class="lab-sense-box"><h4>Cara membaca lab dan widget ini</h4><p>Gunakan widget untuk menguji pilihan wakil. Jika wakil berbeda dari blok yang sama menghasilkan blok tujuan berbeda, maka operasi antarblok belum aman.</p></div>
+<p class="lab-objective"><strong>Tujuan lab:</strong> Uji apakah sebuah kelompok aksi tetap stabil setelah sudut pandang diubah.</p>
+<p class="predict-box"><strong>Sebelum klik tombol:</strong> tebak dulu hasilnya, lalu bandingkan dengan visualisasi.</p>
+<h4>Cerita penerapan</h4><p>Bayangkan tiga kartu yang bisa ditukar posisinya. Sebuah pola aksi dianggap stabil jika setelah sudut pandang diganti, pola itu tetap berada di kelompok yang sama. Konjugasi menguji kestabilan ini.</p>
+<h4>Teori dasar</h4><p>Normalitas dalam grup non-abelian lebih ketat. Kita harus memeriksa apakah aha^{-1} tetap berada di H untuk setiap a di G dan h di H.</p>
+<div class="formula">\(H\triangleleft G \iff aha^{-1}\in H\quad \forall a\in G,\ h\in H\)</div>
+<div class="two"><div><label>Subgrup dari S3</label><select id="norm2_H"><option value="A3">A3={e,r,r²}</option><option value="S12">H={e,s}</option></select><button onclick="norm2()">Uji konjugasi</button></div><div><div class="svgbox" id="norm2_svg"></div><div class="result" id="norm2_out"></div></div></div>
+<div class="quiz"><h4>Cek pemahaman</h4>
+<div class="quiz-item">
+<p><strong>P1.</strong> Mengapa perkalian pada grup hasil bagi membutuhkan normalitas?</p>
+<textarea id="norm2_q1" placeholder="Tulis jawaban dan alasanmu"></textarea>
+<button onclick="checkQuiz('norm2',1)">Cek</button>
+<div class="feedback hint" id="norm2_f1"></div>
+</div>
+<div class="quiz-item">
+<p><strong>P2.</strong> Berikan satu subgrup normal dari S3 berdasarkan lab ini.</p>
+<input id="norm2_q2" placeholder="Tulis jawabanmu"/>
+<button onclick="checkQuiz('norm2',2)">Cek</button>
+<div class="feedback hint" id="norm2_f2"></div>
+</div>
+</div>
+</div></div>
+</details>
+<div class="bottom-home-link"><a href="index.html">← Kembali ke Beranda</a></div>
+</main>
+<footer>Rumus dirender memakai MathJax v3 dengan output SVG. Buka dengan akses internet agar rumus tampil rapi.</footer>
+<script src="app.js"></script>
+</body>
+</html>
